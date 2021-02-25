@@ -2,13 +2,20 @@
 using System.Buffers;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Security.Cryptography;
 using System.Text;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
 using DottApp.RsaAesWrapper;
+using DottApp.Services.Auth;
 using DottApp.WebAPI.Models;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Server.HttpSys;
 using Microsoft.Extensions.Logging;
 
 namespace DottApp.WebAPI.Controllers
@@ -43,16 +50,27 @@ namespace DottApp.WebAPI.Controllers
             return db;
         }
 
-        [HttpGet("Encrypt={data}")]
-        public KeyValuePair<byte[], byte[]> Get(string data)
+        //TODO: Нормальная обработка исключений!
+        [HttpGet("PublicKey={cl_pbKey}")]
+        public string Get(string cl_pbKey)
         {
-            RSAw rsaw = new RSAw(1024 * 2);
-            var pbKey = rsaw.PublicKey;
-            var prKey = rsaw.PrivateKey;
-            ArrayBufferWriter<byte> abw = new ArrayBufferWriter<byte>();
-            KeyValuePair<byte[], byte[]> key =
-                new KeyValuePair<byte[], byte[]>(pbKey.Exponent, pbKey.Modulus);
-            return key;
+            RSAw rsaw = new RSAw(2048);
+            Random rnd = new Random(DateTime.Now.Millisecond);
+            string cl_accessToken = string.Empty;
+            ConnectionSessionRequest cl_key;
+
+            try
+            { cl_key = JsonSerializer.Deserialize<ConnectionSessionRequest>(cl_pbKey); }
+            catch (JsonException e)
+            { return JsonSerializer.Serialize<DAException>(new DAException(1)); }
+
+            for (int i = 0; i < 32; i++) cl_accessToken += (char)rnd.Next('a', 'z');
+            var csr = new ConnectionSessionRequest
+            {
+                PublicKey = new RSAByteKey(rsaw.PublicKey), 
+                AccessToken = new AccessToken().GenNew() //rsaw.Encrypt("Токен")
+            };
+            return JsonSerializer.Serialize<ConnectionSessionRequest>(csr);
         }
 
         [HttpGet("adduser/Login={login}&NickName={nick}")]

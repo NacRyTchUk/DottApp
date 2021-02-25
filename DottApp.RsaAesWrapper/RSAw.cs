@@ -9,7 +9,7 @@ namespace DottApp.RsaAesWrapper
         private readonly RSACryptoServiceProvider _rsa;
         public  RSAParameters PublicKey { get; }
         public  RSAParameters PrivateKey { get; }
-        public RSAw(Int32 keyLength)
+        public RSAw(Int32 keyLength = 1024)
         {
             _rsa = new RSACryptoServiceProvider(keyLength);
             PublicKey = _rsa.ExportParameters(false);
@@ -28,7 +28,7 @@ namespace DottApp.RsaAesWrapper
         /// <returns>Encrypted string</returns>
         public string Encrypt(string data, RSAParameters publicKey)
         {
-            var encode = new UnicodeEncoding();
+            var encode = new UTF8Encoding();
             _rsa.ImportParameters(publicKey);
             var encryptedData = _rsa.Encrypt(encode.GetBytes(data), false);
             return encode.GetString(encryptedData);
@@ -48,7 +48,7 @@ namespace DottApp.RsaAesWrapper
         /// <returns>Decrypted string</returns>
         public string Decrypt(string data, RSAParameters privateKey)
         {
-            var encode = new UnicodeEncoding();
+            var encode = new UTF8Encoding();
             _rsa.ImportParameters(privateKey);
             var encryptedData = _rsa.Encrypt(encode.GetBytes(data), false);
             return encode.GetString(encryptedData);

@@ -15,10 +15,12 @@
         <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.3" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
         <PackageReference Include="System.Data.SQLite.Core" Version="1.0.113.7" />
+        <PackageReference Include="System.Net.Http" Version="4.3.4" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\DottApp.RsaAesWrapper\DottApp.RsaAesWrapper.csproj" />
+      <ProjectReference Include="..\Libs\DottApp.Services.Auth\DottApp.Services.Auth.csproj" />
     </ItemGroup>
 
 </Project>
