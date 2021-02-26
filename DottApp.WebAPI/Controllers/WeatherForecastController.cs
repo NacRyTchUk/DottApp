@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Server.HttpSys;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Linq;
 
 namespace DottApp.WebAPI.Controllers
 {
@@ -58,17 +59,18 @@ namespace DottApp.WebAPI.Controllers
             Random rnd = new Random(DateTime.Now.Millisecond);
             string cl_accessToken = string.Empty;
             ConnectionSessionRequest cl_key;
-
+            
             try
             { cl_key = JsonSerializer.Deserialize<ConnectionSessionRequest>(cl_pbKey); }
             catch (JsonException e)
-            { return JsonSerializer.Serialize<DAException>(new DAException(1)); }
+            { return JsonSerializer.Serialize<DAException>(new DAException(DAExceptionType.BadRequestParameters)); }
 
             for (int i = 0; i < 32; i++) cl_accessToken += (char)rnd.Next('a', 'z');
-            var csr = new ConnectionSessionRequest
+            var csr = new ConnectionSessionResponse
             {
                 PublicKey = new RSAByteKey(rsaw.PublicKey), 
-                AccessToken = new AccessToken().GenNew() //rsaw.Encrypt("Токен")
+                AccessToken = new AccessToken().GenNew(), //rsaw.Encrypt("Токен")
+                SessionId = rnd.Next(0,100).ToString()
             };
             return JsonSerializer.Serialize<ConnectionSessionRequest>(csr);
         }

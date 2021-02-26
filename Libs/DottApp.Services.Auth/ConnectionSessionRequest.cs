@@ -23,8 +23,8 @@ namespace DottApp.Services.Auth
 
     public class AccessToken
     {
-        private const int TOKEN_LENGTH = 64;
-        private const string  SYMBOL_TABLE = 
+        private const int TokenLength = 64;
+        private const string  SymbolTable = 
             "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
         private string _accessToken;
 
@@ -35,8 +35,8 @@ namespace DottApp.Services.Auth
         {
             _accessToken = string.Empty;
             var rnd = new Random(DateTime.Now.Millisecond);
-            for (int i = 0; i < TOKEN_LENGTH; i++) 
-                _accessToken += SYMBOL_TABLE[rnd.Next(0, SYMBOL_TABLE.Length)];
+            for (int i = 0; i < TokenLength; i++) 
+                _accessToken += SymbolTable[rnd.Next(0, SymbolTable.Length)];
             return _accessToken;
         }
     }
@@ -46,6 +46,11 @@ namespace DottApp.Services.Auth
     {
         public RSAByteKey PublicKey { get; set;  }
         public bool IsFirstTime { get; set; } 
+    }
+
+    public class ConnectionSessionResponse : ConnectionSessionRequest
+    {
         public string AccessToken { get; set; }
+        public string SessionId { get; set; }
     }
 }

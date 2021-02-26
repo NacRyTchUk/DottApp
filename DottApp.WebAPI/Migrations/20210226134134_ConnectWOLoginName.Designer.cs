@@ -3,14 +3,16 @@ using System;
 using DottApp.WebAPI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DottApp.WebAPI.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20210226134134_ConnectWOLoginName")]
+    partial class ConnectWOLoginName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,9 +28,6 @@ namespace DottApp.WebAPI.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("ConnectionDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("LoginName")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

@@ -15,5 +15,6 @@ namespace DottApp.WebAPI
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<ActiveConnection> ActiveConnections { get; set; }
     }
 }
