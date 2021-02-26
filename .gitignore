@@ -5,3 +5,4 @@ riderModule.iml
 /_ReSharper.Caches/
 /.vs/DottApp/DesignTimeBuild
 /.vs/DottApp/v16
+/DottApp.Client/DottApp.Client.csproj.user
