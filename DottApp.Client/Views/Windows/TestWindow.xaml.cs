@@ -13,15 +13,13 @@ using System.Windows.Shapes;
 namespace DottApp.Client.Views.Windows
 {
     /// <summary>
-    /// Interaction logic for ProgramLoaderWindow.xaml
+    /// Interaction logic for TestWindow.xaml
     /// </summary>
-    public partial class ProgramLoaderWindow : Window
+    public partial class TestWindow : Window
     {
-        public ProgramLoaderWindow()
+        public TestWindow()
         {
             InitializeComponent();
         }
-
-       
     }
 }

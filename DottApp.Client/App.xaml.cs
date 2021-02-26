@@ -13,5 +13,12 @@ namespace DottApp.Client
     /// </summary>
     public partial class App : Application
     {
+        public void Application_Start()
+        {
+
+        }
+
     }
+
+    
 }
