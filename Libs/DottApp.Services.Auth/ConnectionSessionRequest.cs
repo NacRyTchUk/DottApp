@@ -8,10 +8,12 @@ namespace DottApp.Services.Auth
     {
         public byte[] Exponent { get; set; }
         public byte[] Module { get; set; }
-        public RSAByteKey(RSAParameters key)
+
+        public RSAByteKey setKeyFromParameters(RSAParameters key)
         {
             Exponent = key.Exponent;
             Module = key.Modulus;
+            return this;
         }
 
         public RSAParameters getRSAParameters() => new RSAParameters()

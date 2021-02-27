@@ -52,27 +52,27 @@ namespace DottApp.WebAPI.Controllers
         }
 
         //TODO: Нормальная обработка исключений!
-        [HttpGet("PublicKey={cl_pbKey}")]
-        public string Get(string cl_pbKey)
+        [HttpPost("Connect")]
+        public ConnectionSessionResponse Post([FromBody] ConnectionSessionRequest cl_csrr)
         {
-            RSAw rsaw = new RSAw(2048);
+            RSAw rsaw = new RSAw();
             Random rnd = new Random(DateTime.Now.Millisecond);
             string cl_accessToken = string.Empty;
             ConnectionSessionRequest cl_key;
-            
-            try
-            { cl_key = JsonSerializer.Deserialize<ConnectionSessionRequest>(cl_pbKey); }
-            catch (JsonException e)
-            { return JsonSerializer.Serialize<DAException>(new DAException(DAExceptionType.BadRequestParameters)); }
+            //try
+            //{ cl_key = JsonSerializer.Deserialize<ConnectionSessionRequest>(cl_csr); }
+            //catch (JsonException e)
+            //{ return JsonSerializer.Serialize<DAException>(new DAException(DAExceptionType.BadRequestParameters)); }
+
 
             for (int i = 0; i < 32; i++) cl_accessToken += (char)rnd.Next('a', 'z');
             var csr = new ConnectionSessionResponse
             {
-                PublicKey = new RSAByteKey(rsaw.PublicKey), 
+                PublicKey = new RSAByteKey().setKeyFromParameters(rsaw.PublicKey), 
                 AccessToken = new AccessToken().GenNew(), //rsaw.Encrypt("Токен")
-                SessionId = rnd.Next(0,100).ToString()
+                SessionId = rsaw.Encrypt(rnd.Next(0, 100).ToString(), cl_csrr.PublicKey.getRSAParameters())
             };
-            return JsonSerializer.Serialize<ConnectionSessionRequest>(csr);
+            return csr;
         }
 
         [HttpGet("adduser/Login={login}&NickName={nick}")]
@@ -100,7 +100,7 @@ namespace DottApp.WebAPI.Controllers
         }
 
         [HttpPost]
-        public void Post([FromBody] string body)
+        public void Post([FromBody] string body, string s)
         {
             db.Add(body);
         }

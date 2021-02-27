@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DottApp.Client.Views.Windows"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:viewModels="clr-namespace:DottApp.Client.ViewModels"
         mc:Ignorable="d"
         Background="{DynamicResource MaterialDesignPaper}"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -14,27 +15,34 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         FontSize="16"
         Foreground="{DynamicResource MaterialDesignLightForeground}">
+    <Window.DataContext>
+        <viewModels:DebugViewModel/>
+    </Window.DataContext>
     <DockPanel>
-        <TabControl Style="{DynamicResource MaterialDesignTabControl}">
+        <TabControl  Style="{DynamicResource MaterialDesignTabControl}">
             <TabItem Header="API">
-                <TabControl Style="{DynamicResource MaterialDesignTabControl}" HorizontalAlignment="Right" Width="800" >
+                <TabControl  Style="{DynamicResource MaterialDesignTabControl}" HorizontalAlignment="Stretch" Width="800" VerticalAlignment="Stretch" >
                     <TabItem Header="Connect">
                         <Grid>
                             <StackPanel Margin="10,10,10,10">
                                 <TextBlock Style="{DynamicResource MaterialDesignTextBlock}" Foreground="{DynamicResource MaterialDesignDarkForeground}" >Send request</TextBlock>
                                 <TextBox 
+                                    materialDesign:HintAssist.HelperText="Use json viewer to understand what happend"
                                     Style="{DynamicResource MaterialDesignOutlinedTextBox}"
                                     TextWrapping="Wrap"
                                     HorizontalAlignment="Left" VerticalAlignment="Top"
-                                    MinWidth="280"
+                                    MinWidth="500"
                                     AcceptsReturn="True"
                                     VerticalScrollBarVisibility="Auto"
                                     SpellCheck.IsEnabled="True"
-                                    MaxWidth="400" Height="155" Text="123123" FontWeight="Bold" Foreground="#BCFFFFFF" Margin="10,10,10,10"/>
+                                    MaxWidth="400" Height="auto" 
+                                    Text="{Binding ApiConnectRequestText}" FontWeight="Bold" Foreground="#BCFFFFFF" 
+                                    Margin="10,10,10,10"/>
                                     
                                 <StackPanel Orientation="Horizontal">
-                                    <Button Content="Generate request" Width="auto"  Margin="10,10,10,10"/>
-                                    <Button Content="Send request" Width="auto"  Margin="10,10,10,10"/></StackPanel>
+                                    <Button Content="Generate request" Width="auto"  Margin="10,10,10,10" Command="{Binding GenerateRequestCommand }"/>
+                                    <Button Content="Send request" Width="auto"  Margin="10,10,10,10" Command="{Binding SendRequestCommand }"/>
+                                </StackPanel>
                             </StackPanel>
                             <StackPanel VerticalAlignment="Bottom" Margin="10 10 10 10">
                                 <TextBlock Style="{DynamicResource MaterialDesignTextBlock}" Foreground="{DynamicResource MaterialDesignDarkForeground}" >Response</TextBlock>
@@ -46,7 +54,9 @@
                                     AcceptsReturn="True"
                                     VerticalScrollBarVisibility="Auto"
                                     SpellCheck.IsEnabled="True"
-                                    MaxWidth="400" Height="155" Text="123123" FontWeight="Bold" Foreground="#BCFFFFFF" Margin="10,10,10,10"/>
+                                    MaxWidth="400" Height="155" 
+                                    Text="{Binding ApiConnectResponseText}" 
+                                    FontWeight="Bold" Foreground="#BCFFFFFF" Margin="10,10,10,10"/>
 
                             </StackPanel>
                         </Grid>
