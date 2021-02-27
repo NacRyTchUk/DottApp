@@ -21,5 +21,7 @@ namespace DottApp.Client.Views.Windows
         {
             InitializeComponent();
         }
+
+       
     }
 }

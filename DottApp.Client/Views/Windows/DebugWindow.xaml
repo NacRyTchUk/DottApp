@@ -4,9 +4,57 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DottApp.Client.Views.Windows"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="DebugWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Title="DebugWindow" Height="600" Width="800" 
+        WindowStyle="SingleBorderWindow" 
+        Style="{DynamicResource MaterialDesignStepIconContentControl}" 
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        FontSize="16"
+        Foreground="{DynamicResource MaterialDesignLightForeground}">
+    <DockPanel>
+        <TabControl Style="{DynamicResource MaterialDesignTabControl}">
+            <TabItem Header="API">
+                <TabControl Style="{DynamicResource MaterialDesignTabControl}" HorizontalAlignment="Right" Width="800" >
+                    <TabItem Header="Connect">
+                        <Grid>
+                            <StackPanel Margin="10,10,10,10">
+                                <TextBlock Style="{DynamicResource MaterialDesignTextBlock}" Foreground="{DynamicResource MaterialDesignDarkForeground}" >Send request</TextBlock>
+                                <TextBox 
+                                    Style="{DynamicResource MaterialDesignOutlinedTextBox}"
+                                    TextWrapping="Wrap"
+                                    HorizontalAlignment="Left" VerticalAlignment="Top"
+                                    MinWidth="280"
+                                    AcceptsReturn="True"
+                                    VerticalScrollBarVisibility="Auto"
+                                    SpellCheck.IsEnabled="True"
+                                    MaxWidth="400" Height="155" Text="123123" FontWeight="Bold" Foreground="#BCFFFFFF" Margin="10,10,10,10"/>
+                                    
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="Generate request" Width="auto"  Margin="10,10,10,10"/>
+                                    <Button Content="Send request" Width="auto"  Margin="10,10,10,10"/></StackPanel>
+                            </StackPanel>
+                            <StackPanel VerticalAlignment="Bottom" Margin="10 10 10 10">
+                                <TextBlock Style="{DynamicResource MaterialDesignTextBlock}" Foreground="{DynamicResource MaterialDesignDarkForeground}" >Response</TextBlock>
+                                <TextBox 
+                                    Style="{DynamicResource MaterialDesignOutlinedTextBox}"
+                                    TextWrapping="Wrap"
+                                    HorizontalAlignment="Left" VerticalAlignment="Top"
+                                    MinWidth="280"
+                                    AcceptsReturn="True"
+                                    VerticalScrollBarVisibility="Auto"
+                                    SpellCheck.IsEnabled="True"
+                                    MaxWidth="400" Height="155" Text="123123" FontWeight="Bold" Foreground="#BCFFFFFF" Margin="10,10,10,10"/>
+
+                            </StackPanel>
+                        </Grid>
+                    </TabItem>
+                </TabControl>
+            </TabItem>
+            <TabItem Header="Something else"></TabItem>
+        </TabControl>
+
+    </DockPanel>
 </Window>
