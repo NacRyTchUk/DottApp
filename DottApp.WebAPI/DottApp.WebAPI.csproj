@@ -19,7 +19,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\DottApp.RsaAesWrapper\DottApp.RsaAesWrapper.csproj" />
+      <ProjectReference Include="..\Libs\DottApp.RsaAesWrapper\DottApp.RsaAesWrapper.csproj" />
       <ProjectReference Include="..\Libs\DottApp.Services.Auth\DottApp.Services.Auth.csproj" />
     </ItemGroup>
 
