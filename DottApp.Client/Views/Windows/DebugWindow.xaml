@@ -17,7 +17,7 @@
     <DockPanel>
         <TabControl Style="{DynamicResource MaterialDesignTabControl}">
             <TabItem Header="API">
-                <TabControl Style="{DynamicResource MaterialDesignTabControl}" HorizontalAlignment="Right" Width="800" >
+                <TabControl Style="{DynamicResource MaterialDesignTabControl}" HorizontalAlignment="Left" Width="800" >
                     <TabItem Header="Connect">
                         <Grid>
                             <StackPanel Margin="10,10,10,10">

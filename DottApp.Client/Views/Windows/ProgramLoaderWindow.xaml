@@ -6,27 +6,33 @@
         xmlns:local="clr-namespace:DottApp.Client.Views.Windows"
         xmlns:vm="clr-namespace:DottApp.Client.ViewModels"
         mc:Ignorable="d"
-        Title="ProgramLoaderWindow" Height="180" Width="320" 
+        Title="ProgramLoaderWindow" Height="305" Width="320" 
         ResizeMode="NoResize" WindowStyle="SingleBorderWindow"
         >
     <Window.DataContext>
         <vm:ProgramLoaderViewModel/>
     </Window.DataContext>
-    <Grid>
-        <ProgressBar Value="{Binding ProgressBarValue}" 
-                      Margin="10,121,10,23" Height="20" />
-        <Button Content="Main window" HorizontalAlignment="Left" 
-                Margin="10,10,0,0" VerticalAlignment="Top"
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top" VerticalAlignment="Top">
+            <Button Content="Main window" HorizontalAlignment="Left" 
+                Margin="10,10,0,0"
                 Command="{Binding OpenWindowCommand}"
                 CommandParameter="1"/>
-        <Button Content="Debug window" HorizontalAlignment="Left" 
-            Margin="10,47,0,0" VerticalAlignment="Top"
+            <Button Content="Debug window" HorizontalAlignment="Left" 
+            Margin="10,10,0,0"
             Command="{Binding OpenWindowCommand}"
             CommandParameter="2"/>
-        <Button Content="Test window" HorizontalAlignment="Left" 
-            Margin="10,84,0,0" VerticalAlignment="Top"
+            <Button Content="Test window" HorizontalAlignment="Left" 
+            Margin="10,10,0,0"
             Command="{Binding OpenWindowCommand}"
             CommandParameter="3"/>
+            <Button Content="Sign in window" HorizontalAlignment="Left" 
+            Margin="10,10,0,0"
+            Command="{Binding OpenWindowCommand}"
+            CommandParameter="4"/>
+        </StackPanel>
+        <ProgressBar VerticalAlignment="Bottom" Value="{Binding ProgressBarValue}" 
+                      Margin="10" Height="20" />
 
-    </Grid>
+    </DockPanel>
 </Window>
