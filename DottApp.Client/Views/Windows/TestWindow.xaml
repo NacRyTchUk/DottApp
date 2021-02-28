@@ -3,10 +3,30 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:DottApp.Client.ViewModels"
         xmlns:local="clr-namespace:DottApp.Client.Views.Windows"
         mc:Ignorable="d"
         Title="TestWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <vm:TestWindowViewModel/>
+    </Window.DataContext>
     <Grid>
-        
+        <StackPanel>
+            <TextBox Margin="10" 
+                       Width="200" 
+                       Text="{Binding Text}"
+                       TextAlignment="Center" Cursor="IBeam">
+
+            </TextBox>
+            <Button x:Name="GoButton" Margin ="10" 
+                    Width="100" 
+                    Content="Погнали"
+                    Command="{Binding ShowMessageCommand}" Cursor="Hand">
+            </Button>
+            <TextBlock Margin="10" 
+                       Width="200" 
+                       Text="{Binding Text}"
+                       TextAlignment="Center"/>
+        </StackPanel>
     </Grid>
 </Window>
