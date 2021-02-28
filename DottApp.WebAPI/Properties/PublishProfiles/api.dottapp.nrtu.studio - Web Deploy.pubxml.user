@@ -29,22 +29,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/28/2021 03:39:32</publishTime>
     </File>
     <File Include="DottApp.WebAPI.deps.json">
-      <publishTime>02/28/2021 03:39:39</publishTime>
+      <publishTime>02/28/2021 04:46:47</publishTime>
     </File>
     <File Include="DottApp.WebAPI.dll">
-      <publishTime>02/28/2021 03:39:39</publishTime>
+      <publishTime>02/28/2021 04:46:46</publishTime>
     </File>
     <File Include="DottApp.WebAPI.exe">
-      <publishTime>02/28/2021 03:39:39</publishTime>
+      <publishTime>02/28/2021 04:46:46</publishTime>
     </File>
     <File Include="DottApp.WebAPI.pdb">
-      <publishTime>02/28/2021 03:39:39</publishTime>
+      <publishTime>02/28/2021 04:46:46</publishTime>
     </File>
     <File Include="DottApp.WebAPI.runtimeconfig.json">
       <publishTime>02/27/2021 23:16:52</publishTime>
     </File>
     <File Include="Humanizer.dll">
-      <publishTime>02/06/2020 13:07:58</publishTime>
+      <publishTime>06/02/2020 13:07:58</publishTime>
     </File>
     <File Include="Microsoft.Data.SqlClient.dll">
       <publishTime>08/25/2020 23:24:48</publishTime>
@@ -191,16 +191,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/15/2019 08:53:46</publishTime>
     </File>
     <File Include="SQLitePCLRaw.batteries_v2.dll">
-      <publishTime>03/09/2020 17:13:26</publishTime>
+      <publishTime>09/03/2020 17:13:26</publishTime>
     </File>
     <File Include="SQLitePCLRaw.core.dll">
-      <publishTime>03/09/2020 17:13:04</publishTime>
+      <publishTime>09/03/2020 17:13:04</publishTime>
     </File>
     <File Include="SQLitePCLRaw.nativelibrary.dll">
-      <publishTime>03/09/2020 17:13:02</publishTime>
+      <publishTime>09/03/2020 17:13:02</publishTime>
     </File>
     <File Include="SQLitePCLRaw.provider.dynamic_cdecl.dll">
-      <publishTime>03/09/2020 17:13:18</publishTime>
+      <publishTime>09/03/2020 17:13:18</publishTime>
     </File>
     <File Include="Swashbuckle.AspNetCore.Swagger.dll">
       <publishTime>09/23/2020 12:47:20</publishTime>
@@ -230,7 +230,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/15/2019 08:37:42</publishTime>
     </File>
     <File Include="web.config">
-      <publishTime>02/28/2021 03:39:40</publishTime>
+      <publishTime>02/28/2021 04:46:47</publishTime>
     </File>
   </ItemGroup>
 </Project>

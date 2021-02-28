@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Net.Http;
+using System.Net.Security;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
@@ -89,13 +90,14 @@ namespace DottApp.Client.ViewModels
         {
              HttpClient clientaHttpClient = new HttpClient();
              RestClient client = new RestClient("http://api.dottapp.nrtu.studio");
-            var req = new RestRequest("/Weatherforecast/Connect");
+             client.RemoteCertificateValidationCallback = (sender, ser, chain, sslPolicyErrors) => true;
+            var req = new RestRequest("WeatherForecast/Connect");
             req.AddJsonBody(JsonSerializer.Deserialize<ConnectionSessionRequest>(ApiConnectRequestText));
             
             var resp = client.Post(req);
             
             ApiConnectResponseText =   resp.Content;
-            MessageBox.Show("done");
+            MessageBox.Show(resp.ContentType + "\n" + resp.ErrorMessage);
         }
 
         private bool CanSendRequestCommandExecute(object param) => true;

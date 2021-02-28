@@ -6,20 +6,20 @@ namespace DottApp.Services.Auth
 {
     public class RSAByteKey
     {
-        public byte[] Exponent { get; set; }
-        public byte[] Module { get; set; }
+        public string Exponent { get; set; } //todo: change da type
+        public string Module { get; set; }
 
         public RSAByteKey setKeyFromParameters(RSAParameters key)
         {
-            Exponent = key.Exponent;
-            Module = key.Modulus;
+            Exponent = Convert.ToBase64String(key.Exponent);
+            Module = Convert.ToBase64String(key.Modulus);
             return this;
         }
 
         public RSAParameters getRSAParameters() => new RSAParameters()
         {
-            Exponent = this.Exponent,
-            Modulus = this.Module
+            Exponent = Convert.FromBase64String(this.Exponent),
+            Modulus = Convert.FromBase64String(this.Module)
         };
     }
 
