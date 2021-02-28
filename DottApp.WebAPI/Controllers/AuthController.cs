@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 using DottApp.RsaAesWrapper;
 using DottApp.Services.Auth;
@@ -18,7 +20,8 @@ namespace DottApp.WebAPI.Controllers
         [HttpPost("NewConnectSession")]
         public ConnectionSessionResponse Post([FromBody]ConnectionSessionRequest csRequest)
         {
-            RSAw host_rsaw = new RSAw();
+            RSACryptoServiceProvider host_rsaw = new RSACryptoServiceProvider();
+            RSACryptoServiceProvider client_rsaw = RSAKeys.ImportPublicKey(csRequest.PublicKey);
             Random rnd = new Random(DateTime.Now.Millisecond);
             
             string cl_accessToken = string.Empty;
@@ -26,9 +29,9 @@ namespace DottApp.WebAPI.Controllers
 
             var csResponse = new ConnectionSessionResponse
             {
-                PublicKey = new RSAByteKey().SetKeyFromParameters(host_rsaw.PublicKey),
-                AccessToken = host_rsaw.Encrypt("Токен"), // new AccessToken().GenNew()
-                SessionId = host_rsaw.Encrypt(rnd.Next(0, 100).ToString(), csRequest.PublicKey.GetRSAParameters())
+                PublicKey = RSAKeys.ExportPublicKey(host_rsaw),
+                AccessToken = Convert.ToBase64String(client_rsaw.Encrypt(Encoding.UTF8.GetBytes("Токен"), false)), // new AccessToken().GenNew()
+                SessionId = Convert.ToBase64String(client_rsaw.Encrypt(Encoding.UTF8.GetBytes(rnd.Next(0, 100).ToString()), false))
             };
             return csResponse;
         }

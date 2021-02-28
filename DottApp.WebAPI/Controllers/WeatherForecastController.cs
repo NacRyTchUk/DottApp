@@ -52,28 +52,28 @@ namespace DottApp.WebAPI.Controllers
         }
 
         //TODO: Нормальная обработка исключений!
-        [HttpPost("Connect")]
-        public ConnectionSessionResponse Post([FromBody] ConnectionSessionRequest cl_csrr)
-        {
-            RSAw rsaw = new RSAw();
-            Random rnd = new Random(DateTime.Now.Millisecond);
-            string cl_accessToken = string.Empty;
-            ConnectionSessionRequest cl_key;
-            //try
-            //{ cl_key = JsonSerializer.Deserialize<ConnectionSessionRequest>(cl_csr); }
-            //catch (JsonException e)
-            //{ return JsonSerializer.Serialize<DAException>(new DAException(DAExceptionType.BadRequestParameters)); }
+        //[HttpPost("Connect")]
+        //public ConnectionSessionResponse Post([FromBody] ConnectionSessionRequest cl_csrr)
+        //{
+        //    //RSACryptoServiceProvider rsaw = new RSACryptoServiceProvider();
+        //    //Random rnd = new Random(DateTime.Now.Millisecond);
+        //    //string cl_accessToken = string.Empty;
+        //    ////ConnectionSessionRequest cl_key;
+        //    ////try
+        //    ////{ cl_key = JsonSerializer.Deserialize<ConnectionSessionRequest>(cl_csr); }
+        //    ////catch (JsonException e)
+        //    ////{ return JsonSerializer.Serialize<DAException>(new DAException(DAExceptionType.BadRequestParameters)); }
 
 
-            for (int i = 0; i < 32; i++) cl_accessToken += (char)rnd.Next('a', 'z');
-            var csr = new ConnectionSessionResponse
-            {
-                PublicKey = new RSAByteKey().SetKeyFromParameters(rsaw.PublicKey), 
-                AccessToken = new AccessToken().GenNew(), //rsaw.Encrypt("Токен")
-                SessionId = rsaw.Encrypt(rnd.Next(0, 100).ToString(), cl_csrr.PublicKey.GetRSAParameters())
-            };
-            return csr;
-        }
+        //    //for (int i = 0; i < 32; i++) cl_accessToken += (char)rnd.Next('a', 'z');
+        //    //var csr = new ConnectionSessionResponse
+        //    //{
+        //    //    PublicKey = RSAKeys.ExportPublicKey(rsaw), 
+        //    //    AccessToken = new AccessToken().GenNew(), //rsaw.Encrypt("Токен")
+        //    //    SessionId = rsaw.Encrypt(rnd.Next(0, 100).ToString(), cl_csrr.PublicKey.GetRSAParameters())
+        //    //};
+        //    //return csr;
+        //}
 
         [HttpGet("adduser/Login={login}&NickName={nick}")]
         public IActionResult Get(string login, string nick)
