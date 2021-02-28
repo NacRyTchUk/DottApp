@@ -26,6 +26,7 @@
     <ItemGroup>
       <ProjectReference Include="..\Libs\DottApp.RsaAesWrapper\DottApp.RsaAesWrapper.csproj" />
       <ProjectReference Include="..\Libs\DottApp.Services.Auth\DottApp.Services.Auth.csproj" />
+      <ProjectReference Include="..\Libs\RESTw\DottApp.RestWrapper.csproj" />
     </ItemGroup>
 
 </Project>

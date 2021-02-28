@@ -1,22 +1,25 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace DottApp.Services.Auth
 {
     public class RSAByteKey
     {
-        public string Exponent { get; set; } //todo: change da type
+        [JsonPropertyName("exponent")]
+        public string Exponent { get; set; } 
+        [JsonPropertyName("module")]
         public string Module { get; set; }
 
-        public RSAByteKey setKeyFromParameters(RSAParameters key)
+        public RSAByteKey SetKeyFromParameters(RSAParameters key)
         {
             Exponent = Convert.ToBase64String(key.Exponent);
             Module = Convert.ToBase64String(key.Modulus);
             return this;
         }
 
-        public RSAParameters getRSAParameters() => new RSAParameters()
+        public RSAParameters GetRSAParameters() => new RSAParameters()
         {
             Exponent = Convert.FromBase64String(this.Exponent),
             Modulus = Convert.FromBase64String(this.Module)
@@ -46,13 +49,17 @@ namespace DottApp.Services.Auth
 
     public class ConnectionSessionRequest
     {
+        [JsonPropertyName("publicKey")]
         public RSAByteKey PublicKey { get; set;  }
+        [JsonPropertyName("isFirstTime")]
         public bool IsFirstTime { get; set; } 
     }
 
     public class ConnectionSessionResponse : ConnectionSessionRequest
     {
+        [JsonPropertyName("accessToken")]
         public string AccessToken { get; set; }
+        [JsonPropertyName("sessionId")]
         public string SessionId { get; set; }
     }
 }

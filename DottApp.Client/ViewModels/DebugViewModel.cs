@@ -12,6 +12,7 @@ using System.Windows.Input;
 using DottApp.Client.Infrastructure.Commands;
 using DottApp.Client.ViewModels.Base;
 using DottApp.Client.Views.Windows;
+using DottApp.RestWrapper;
 using DottApp.RsaAesWrapper;
 using DottApp.Services.Auth;
 using Flurl.Http;
@@ -74,7 +75,7 @@ namespace DottApp.Client.ViewModels
             ConnectionSessionRequest csr = new ConnectionSessionRequest()
             {
                 IsFirstTime = true,
-                PublicKey = new RSAByteKey().setKeyFromParameters(rsaw.PublicKey)
+                PublicKey = new RSAByteKey().SetKeyFromParameters(rsaw.PublicKey)
             };
 
             ApiConnectRequestText = JsonSerializer.Serialize(csr);
@@ -88,16 +89,24 @@ namespace DottApp.Client.ViewModels
 
         private void OnSendRequestCommandExecuted(object param)
         {
-             HttpClient clientaHttpClient = new HttpClient();
-             RestClient client = new RestClient("http://api.dottapp.nrtu.studio");
-             client.RemoteCertificateValidationCallback = (sender, ser, chain, sslPolicyErrors) => true;
-            var req = new RestRequest("WeatherForecast/Connect");
-            req.AddJsonBody(JsonSerializer.Deserialize<ConnectionSessionRequest>(ApiConnectRequestText));
-            
-            var resp = client.Post(req);
-            
-            ApiConnectResponseText =   resp.Content;
-            MessageBox.Show(resp.ContentType + "\n" + resp.ErrorMessage);
+            string baseUrl = ConfigurationManager.AppSettings["BaseApiUrl"];
+            #if DEBUG
+                baseUrl = ConfigurationManager.AppSettings["BaseDebugApiUrl"];
+            #endif
+
+
+            //RestClient client = new RestClient("http://api.dottapp.nrtu.studio");
+            // client.RemoteCertificateValidationCallback = (sender, ser, chain, sslPolicyErrors) => true;
+            //var req = new RestRequest("WeatherForecast/Connect");
+            //req.AddJsonBody(JsonSerializer.Deserialize<ConnectionSessionRequest>(ApiConnectRequestText));
+            //var resp = client.Post(req);
+            //ApiConnectResponseText =   resp.Content;
+
+            RESTw restw = new RESTw(baseUrl);
+            var response = restw.Post<ConnectionSessionRequest>
+            ("WeatherForecast/Connect",
+                JsonSerializer.Deserialize<ConnectionSessionRequest>(ApiConnectRequestText));
+            ApiConnectResponseText = response.Content;
         }
 
         private bool CanSendRequestCommandExecute(object param) => true;

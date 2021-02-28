@@ -6,14 +6,15 @@ namespace DottApp.Services.Auth
 {
     public enum DAExceptionType
     {
-        UnknownError = -1,
+        BadResponse,
+        UnknownError = 0,
         MethodIsNotImplemented,
         BadRequestParameters,
         UnknownMethod,
         BadToken,
         BadPublicKey
     }
-    public class DAException
+    public class DAException : Exception
     {
         public DAExceptionType ErrCode { get; set; }
         public string ErrType { get; set; }

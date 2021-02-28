@@ -68,9 +68,9 @@ namespace DottApp.WebAPI.Controllers
             for (int i = 0; i < 32; i++) cl_accessToken += (char)rnd.Next('a', 'z');
             var csr = new ConnectionSessionResponse
             {
-                PublicKey = new RSAByteKey().setKeyFromParameters(rsaw.PublicKey), 
+                PublicKey = new RSAByteKey().SetKeyFromParameters(rsaw.PublicKey), 
                 AccessToken = new AccessToken().GenNew(), //rsaw.Encrypt("Токен")
-                SessionId = rsaw.Encrypt(rnd.Next(0, 100).ToString(), cl_csrr.PublicKey.getRSAParameters())
+                SessionId = rsaw.Encrypt(rnd.Next(0, 100).ToString(), cl_csrr.PublicKey.GetRSAParameters())
             };
             return csr;
         }
