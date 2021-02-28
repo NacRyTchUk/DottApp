@@ -9,9 +9,11 @@ using System.Windows;
 
 namespace DottApp.Client.ViewModels
 {
-    #region Тект
+   
     internal class TestWindowViewModel : ViewModel
     {
+        #region Тект
+
         private string _Text = "Введи сюда что-нибудь";
         public string Text
         {

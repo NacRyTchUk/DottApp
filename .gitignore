@@ -6,3 +6,4 @@ riderModule.iml
 /.vs/DottApp/DesignTimeBuild
 /.vs/DottApp/v16
 /DottApp.Client/DottApp.Client.csproj.user
+/DottApp.WebAPI/api.dottapp.nrtu.studio.publishsettings
