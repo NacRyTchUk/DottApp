@@ -55,13 +55,14 @@ namespace DottApp.Client.ViewModels
         private bool CanOpenWindowCommandExecute(object param) => true;
 
 
+
         #endregion
 
         public ProgramLoaderViewModel()
         {
             #region Commands initialization
             OpenWindowCommand = new LambdaCommand(OnOpenWindowCommandExecuted, CanOpenWindowCommandExecute);
-
+            
 
             #endregion
         }

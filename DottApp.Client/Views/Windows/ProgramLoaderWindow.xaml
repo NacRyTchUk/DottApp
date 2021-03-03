@@ -26,7 +26,7 @@
             Margin="10,10,0,0"
             Command="{Binding OpenWindowCommand}"
             CommandParameter="3"/>
-            <Button Content="Sign in window" HorizontalAlignment="Left" 
+            <Button Content="Auth window" HorizontalAlignment="Left" 
             Margin="10,10,0,0"
             Command="{Binding OpenWindowCommand}"
             CommandParameter="4"/>
