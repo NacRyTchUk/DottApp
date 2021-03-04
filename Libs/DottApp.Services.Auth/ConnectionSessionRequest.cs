@@ -62,5 +62,7 @@ namespace DottApp.Services.Auth
         public string AccessToken { get; set; }
         [JsonPropertyName("sessionId")]
         public string SessionId { get; set; }
+        [JsonPropertyName("salt")]
+        public string Salt { get; set; }
     }
 }
