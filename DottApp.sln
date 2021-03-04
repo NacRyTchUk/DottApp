@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DottApp.Services.Auth", "Li
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DottApp.RsaAesWrapper", "Libs\DottApp.RsaAesWrapper\DottApp.RsaAesWrapper.csproj", "{D010E3AE-62E3-4988-9FE4-B5197F3857B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DottApp.RestWrapper", "Libs\RESTw\DottApp.RestWrapper.csproj", "{821D87A5-89EE-4F8F-8547-86F09646C95E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DottApp.RestWrapper", "Libs\RESTw\DottApp.RestWrapper.csproj", "{821D87A5-89EE-4F8F-8547-86F09646C95E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DottApp.Api.Rest", "Libs\DottApp.Api.Rest\DottApp.Api.Rest.csproj", "{4E33FC3B-E875-4681-A0AC-41926BBB3CBE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{821D87A5-89EE-4F8F-8547-86F09646C95E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{821D87A5-89EE-4F8F-8547-86F09646C95E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{821D87A5-89EE-4F8F-8547-86F09646C95E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E33FC3B-E875-4681-A0AC-41926BBB3CBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E33FC3B-E875-4681-A0AC-41926BBB3CBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E33FC3B-E875-4681-A0AC-41926BBB3CBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E33FC3B-E875-4681-A0AC-41926BBB3CBE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +61,7 @@ Global
 		{5C7C17E5-DDF2-42E5-87E1-0AD126ABFFE3} = {DB600D75-CA28-45B8-B877-F3A2ACAEF249}
 		{D010E3AE-62E3-4988-9FE4-B5197F3857B3} = {DB600D75-CA28-45B8-B877-F3A2ACAEF249}
 		{821D87A5-89EE-4F8F-8547-86F09646C95E} = {DB600D75-CA28-45B8-B877-F3A2ACAEF249}
+		{4E33FC3B-E875-4681-A0AC-41926BBB3CBE} = {DB600D75-CA28-45B8-B877-F3A2ACAEF249}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {67C1564B-4ACD-4A46-A326-DDAE789C9601}

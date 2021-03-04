@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Text;
 using System.Windows;
 using System.Windows.Input;
 using DottApp.Client.Infrastructure.Commands;
+using DottApp.Client.Properties;
 using DottApp.Client.ViewModels.Base;
 using DottApp.Client.Views.Windows;
+using DottApp.Services.Auth;
+
 
 namespace DottApp.Client.ViewModels
 {
@@ -43,12 +47,15 @@ namespace DottApp.Client.ViewModels
         private void OnOpenWindowCommandExecuted(object param)
         {
             if (param is null) return;
-            switch (Convert.ToInt32(param))
-            {
-                case 1 : { new MainWindow().Show(); break; }
-                case 2 : { new DebugWindow().Show(); break; }
-                case 3 : { new TestWindow().Show(); break; }
-            }
+
+            
+
+            //switch (Convert.ToInt32(param))
+            //{
+            //    case 1 : { new MainWindow().Show(); break; }
+            //    case 2 : { new DebugWindow().Show(); break; }
+            //    case 3 : { new TestWindow().Show(); break; }
+            //}
         }
 
         private bool CanOpenWindowCommandExecute(object param) => true;

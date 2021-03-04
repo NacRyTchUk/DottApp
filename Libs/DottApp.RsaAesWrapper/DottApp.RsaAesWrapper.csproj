@@ -4,4 +4,12 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DottApp.Services.Auth\DottApp.Services.Auth.csproj" />
+  </ItemGroup>
+
 </Project>
