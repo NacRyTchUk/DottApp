@@ -5,10 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="5.0.0" />
+    <PackageReference Include="RestSharp" Version="106.11.7" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DottApp.RsaAesWrapper\DottApp.RsaAesWrapper.csproj" />
     <ProjectReference Include="..\DottApp.Services.Auth\DottApp.Services.Auth.csproj" />
   </ItemGroup>
 

@@ -1,27 +1,31 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text.Json;
+using System.Text.Json.Serialization;
+using Org.BouncyCastle.Security;
 
 namespace DottApp.Services.Auth
 {
-    public class RSAByteKey
-    {
-        public string Exponent { get; set; } //todo: change da type
-        public string Module { get; set; }
+    //public class RSAByteKey
+    //{
+    //    [JsonPropertyName("exponent")]
+    //    public string Exponent { get; set; } 
+    //    [JsonPropertyName("module")]
+    //    public string Module { get; set; }
 
-        public RSAByteKey setKeyFromParameters(RSAParameters key)
-        {
-            Exponent = Convert.ToBase64String(key.Exponent);
-            Module = Convert.ToBase64String(key.Modulus);
-            return this;
-        }
+    //    public RSAByteKey SetKeyFromParameters(RSAParameters key)
+    //    {
+    //        Exponent = Convert.ToBase64String(key.Exponent);
+    //        Module = Convert.ToBase64String(key.Modulus);
+    //        return this;
+    //    }
 
-        public RSAParameters getRSAParameters() => new RSAParameters()
-        {
-            Exponent = Convert.FromBase64String(this.Exponent),
-            Modulus = Convert.FromBase64String(this.Module)
-        };
-    }
+    //    public RSAParameters GetRSAParameters() => new RSAParameters()
+    //    {
+    //        Exponent = Convert.FromBase64String(this.Exponent),
+    //        Modulus = Convert.FromBase64String(this.Module)
+    //    };
+    //}
 
     public class AccessToken
     {
@@ -36,7 +40,7 @@ namespace DottApp.Services.Auth
         public string GenNew()
         {
             _accessToken = string.Empty;
-            var rnd = new Random(DateTime.Now.Millisecond);
+            var rnd = new SecureRandom();
             for (int i = 0; i < TokenLength; i++) 
                 _accessToken += SymbolTable[rnd.Next(0, SymbolTable.Length)];
             return _accessToken;
@@ -46,13 +50,19 @@ namespace DottApp.Services.Auth
 
     public class ConnectionSessionRequest
     {
-        public RSAByteKey PublicKey { get; set;  }
+        [JsonPropertyName("publicKey")]
+        public string PublicKey { get; set;  }
+        [JsonPropertyName("isFirstTime")]
         public bool IsFirstTime { get; set; } 
     }
 
     public class ConnectionSessionResponse : ConnectionSessionRequest
     {
+        [JsonPropertyName("accessToken")]
         public string AccessToken { get; set; }
+        [JsonPropertyName("sessionId")]
         public string SessionId { get; set; }
+        [JsonPropertyName("salt")]
+        public string Salt { get; set; }
     }
 }
