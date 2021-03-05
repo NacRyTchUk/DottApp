@@ -12,8 +12,8 @@ namespace DottApp.Api.Rest.Request_Response
         public string PasswordHash { get; set; }
     }
 
-    public class RegistrationResponse 
-    {
-        
+    public class RegistrationResponse
+    { 
+        public string AccessToken { get; set; }
     }
 }

@@ -20,8 +20,15 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Libs\DottApp.Api.Rest\DottApp.Api.Rest.csproj" />
       <ProjectReference Include="..\Libs\DottApp.RsaAesWrapper\DottApp.RsaAesWrapper.csproj" />
       <ProjectReference Include="..\Libs\DottApp.Services.Auth\DottApp.Services.Auth.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="DataBase\dottapp.main.db">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

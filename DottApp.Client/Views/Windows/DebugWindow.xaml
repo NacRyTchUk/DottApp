@@ -61,6 +61,30 @@
                             </StackPanel>
                         </Grid>
                     </TabItem>
+                    <TabItem Header ="SingUp">
+                       <Grid>
+                           <StackPanel Margin="16 16 16 16">
+                                <TextBox Width="181" HorizontalAlignment="Left"
+                                         Style="{DynamicResource MaterialDesignOutlinedTextBox}" Text="{Binding ApiRegLogin}"/>
+                               <TextBox Width="181" HorizontalAlignment="Left"
+                                        Style="{DynamicResource MaterialDesignOutlinedTextBox}" Text="{Binding ApiRegNick}"/>
+                               <TextBox Width="181" HorizontalAlignment="Left"
+                                        Style="{DynamicResource MaterialDesignOutlinedTextBox}" Text="{Binding ApiRegPass}"/>
+                               <Button HorizontalAlignment="Left" Command="{Binding SendRegRequestCommand }" Style="{DynamicResource MaterialDesignToolButton}" >Send</Button>
+                               <TextBox 
+                                   Style="{DynamicResource MaterialDesignOutlinedTextBox}"
+                                   TextWrapping="Wrap"
+                                   HorizontalAlignment="Left" VerticalAlignment="Top"
+                                   MinWidth="280"
+                                   AcceptsReturn="True"
+                                   VerticalScrollBarVisibility="Auto"
+                                   SpellCheck.IsEnabled="True"
+                                   MaxWidth="400" Height="155" 
+                                   Text="{Binding ApiRegResponseText}" 
+                                   FontWeight="Bold" Foreground="#BCFFFFFF" Margin="10,10,10,10"/>
+                            </StackPanel>
+                       </Grid> 
+                    </TabItem>
                 </TabControl>
             </TabItem>
             <TabItem Header="Something else"></TabItem>
