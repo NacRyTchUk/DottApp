@@ -36,7 +36,7 @@ namespace DottApp.Client.ViewModels
             get => _NickName;
             set => Set(ref _NickName, value);
         }
-        
+
         private string _SelectedTabNum;
         public string SelectedTabNum
         {
@@ -44,16 +44,63 @@ namespace DottApp.Client.ViewModels
             set => Set(ref _SelectedTabNum, value);
         }
 
-        
-        public SecureString SecureInPassword { private get; set; }
-        public SecureString SecureRegPassword { private get; set; }
-        public SecureString SecureRegConfirmPassword { private get; set; }
+        private string _InPassword;
+        public string InPassword
+        {
+            get => _InPassword;
+            set => Set(ref _InPassword, value);
+        }
+        private string _InRegPassword;
+        public string InRegPassword
+        {
+            get
+            {
+                EqualPasswordsColor = Equals(_InRegPassword, _InRegConfirmPassword) ? System.Windows.Media.Brushes.Green :
+                   System.Windows.Media.Brushes.Red;
+                return _InRegPassword;
+            }
+            set => Set(ref _InRegPassword, value);
+        }
+
+        private string _InRegConfirmPassword;
+        public string InRegConfirmPassword
+        {
+            get
+            {
+                EqualPasswordsColor = Equals(_InRegPassword, _InRegConfirmPassword) ? System.Windows.Media.Brushes.Green :
+                   System.Windows.Media.Brushes.Red;
+                return _InRegConfirmPassword;
+            }
+            set =>
+                Set(ref _InRegConfirmPassword, value);
+        }
+
+        private bool _EqualPasswords;
+        public bool EqualPasswords
+        {
+            get => Equals(_InRegPassword, _InRegConfirmPassword);
+            set => Set(ref _EqualPasswords, value);
+        }
+
+        //private MaterialDesignColors.MaterialDesignColor _EqualPasswordsColor = MaterialDesignColors.MaterialDesignColor.Green;
+
+        //public MaterialDesignColors.MaterialDesignColor EqualPasswordsColor
+        //{
+        //    get => _EqualPasswordsColor;
+        //    set => Set(ref _EqualPasswordsColor, value);
+        //}
+
+        private System.Windows.Media.Brush _EqualPasswordsColor = System.Windows.Media.Brushes.Red;
+
+        public System.Windows.Media.Brush EqualPasswordsColor
+        {
+            get => _EqualPasswordsColor;
+            set => Set(ref _EqualPasswordsColor, value);
+        }
         #endregion
 
 
         #region Commands
-
-        
 
         public ICommand SelectTabCommand { get; }
 
@@ -65,13 +112,23 @@ namespace DottApp.Client.ViewModels
 
         private bool CanSelectTabCommandExecute(object param) => true;
 
+        public ICommand PasswordTextChanged { get; }
+
+        //private void OnPasswordTextChangedExecuted(object param = null)
+        //{
+        //    _EqualPasswordsColor = Equals(_InRegPassword, _InRegConfirmPassword) ? MaterialDesignColors.MaterialDesignColor.Green :
+        //        MaterialDesignColors.MaterialDesignColor.Red;
+        //}
+
+        //private bool CanPasswordTextChangedExecute(object param = null) => true;
+
         #endregion
 
         public AuthViewModel()
         {
             #region Commands initialization
             SelectTabCommand = new LambdaCommand(OnSelectTabCommandExecuted, CanSelectTabCommandExecute);
-
+            //SelectTabCommand = new LambdaCommand(OnPasswordTextChangedExecuted, CanPasswordTextChangedExecute);
             #endregion
         }
     }
