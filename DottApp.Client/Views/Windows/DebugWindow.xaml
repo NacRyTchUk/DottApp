@@ -38,7 +38,8 @@
                                     MaxWidth="400" Height="auto" 
                                     Text="{Binding ApiConnectRequestText}" FontWeight="Bold" Foreground="#BCFFFFFF" 
                                     Margin="10,10,10,10"/>
-                                    
+                                <TextBox Text="dsa" 
+                                         FontFamily="pack://application:,,,/Resources/#password" />
                                 <StackPanel Orientation="Horizontal">
                                     <Button Content="Generate request" Width="auto"  Margin="10,10,10,10" Command="{Binding GenerateRequestCommand }"/>
                                     <Button Content="Send request" Width="auto"  Margin="10,10,10,10" Command="{Binding SendRequestCommand }"/>
