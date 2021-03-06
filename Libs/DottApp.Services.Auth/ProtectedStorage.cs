@@ -22,7 +22,7 @@ namespace DottApp.Services.Auth
 
     public class PrivateData
     {
-        public RSAParameters RSAPrivateKey { get; set; }
+        public string AccessToken { get; set; }
         public byte[] AesKey { get; set; }
         public string word { get; set; }
     };

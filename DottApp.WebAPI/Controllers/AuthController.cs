@@ -31,7 +31,7 @@ namespace DottApp.WebAPI.Controllers
 
 
 
-        [HttpPost("NewConnectSession")]
+        [HttpPost("Connect")]
         public ConnectionSessionResponse Post([FromBody]ConnectionSessionRequest csRequest)
         {
             Console.WriteLine("new conenct");
@@ -68,10 +68,11 @@ namespace DottApp.WebAPI.Controllers
             return csResponse;
         }
 
-        [HttpPost("SignUp/SID={sid}")]
+        [HttpPost("SignUp")]
         public RegistrationResponse Post([FromBody] RegistrationRequest regRequest, string sid)
         {
             Console.WriteLine("new re req");
+            Console.WriteLine(sid);
             
             var sessionid =  _context.ActiveConnections.Where(cont => cont.SessionId == sid).ToArray()[0].Id;
             if (_context.Users.Where(user => user.LoginName == regRequest.LoginName).ToArray().Length == 0 &&
