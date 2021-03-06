@@ -86,6 +86,10 @@
                                     <domain:NotTooLong ValidatesOnTargetUpdated="False" />
                                 </Binding.ValidationRules>
                             </Binding>
+                            <!--Disable Context Menu-->
+                            <TextBox.ContextMenu>
+                                <ContextMenu IsEnabled="False"/>
+                            </TextBox.ContextMenu>
                             <TextBox.InputBindings>
                                 <!--Disable CTRL+C-->
                                 <KeyBinding Command="ApplicationCommands.NotACommand"
@@ -135,6 +139,7 @@
                                      UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
                                     <domain:NotEmptyValidationRule ValidatesOnTargetUpdated="False" />
+                                    <domain:NotTooShort ValidatesOnTargetUpdated="False" />
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox>
@@ -153,6 +158,7 @@
                             <Binding Path="NickName"
                                      UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
+                                    <domain:NotEmptyValidationRule ValidatesOnTargetUpdated="False" />
                                     <domain:NotTooShort ValidatesOnTargetUpdated="False" />
                                 </Binding.ValidationRules>
                             </Binding>
@@ -176,6 +182,10 @@
                                     <domain:NotTooLong ValidatesOnTargetUpdated="False" />
                                 </Binding.ValidationRules>
                             </Binding>
+                            <!--Disable Context Menu-->
+                            <TextBox.ContextMenu>
+                                <ContextMenu IsEnabled="False" />
+                            </TextBox.ContextMenu>
                             <TextBox.InputBindings>
                                 <!--Disable CTRL+C-->
                                 <KeyBinding Command="ApplicationCommands.NotACommand"
@@ -198,10 +208,15 @@
                                  Height="55"
                                  FontSize="26"
                                  materialDesign:HintAssist.FloatingScale="0.5"
-                                 FontFamily="pack://application:,,,/Properties/Resources/#password">
+                                 FontFamily="pack://application:,,,/Properties/Resources/#password"
+                                 Cursor="IBeam">
                             <Binding Path="InRegConfirmPassword"
                                      UpdateSourceTrigger="PropertyChanged">
                             </Binding>
+                            <!--Disable Context Menu-->
+                            <TextBox.ContextMenu>
+                                <ContextMenu IsEnabled="False" />
+                            </TextBox.ContextMenu>
                             <materialDesign:HintAssist.Foreground>
                                 <Binding Path="EqualPasswordsColor"
                                          UpdateSourceTrigger="PropertyChanged">
@@ -215,7 +230,6 @@
                                          UpdateSourceTrigger="PropertyChanged">
                                 </Binding>
                             </materialDesign:TextFieldAssist.UnderlineBrush>
-
                             <TextBox.InputBindings>
                                 <!--Disable CTRL+C-->
                                 <KeyBinding Command="ApplicationCommands.NotACommand"

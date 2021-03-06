@@ -75,21 +75,6 @@ namespace DottApp.Client.ViewModels
                 Set(ref _InRegConfirmPassword, value);
         }
 
-        private bool _EqualPasswords;
-        public bool EqualPasswords
-        {
-            get => Equals(_InRegPassword, _InRegConfirmPassword);
-            set => Set(ref _EqualPasswords, value);
-        }
-
-        //private MaterialDesignColors.MaterialDesignColor _EqualPasswordsColor = MaterialDesignColors.MaterialDesignColor.Green;
-
-        //public MaterialDesignColors.MaterialDesignColor EqualPasswordsColor
-        //{
-        //    get => _EqualPasswordsColor;
-        //    set => Set(ref _EqualPasswordsColor, value);
-        //}
-
         private System.Windows.Media.Brush _EqualPasswordsColor = System.Windows.Media.Brushes.Red;
 
         public System.Windows.Media.Brush EqualPasswordsColor
@@ -114,21 +99,12 @@ namespace DottApp.Client.ViewModels
 
         public ICommand PasswordTextChanged { get; }
 
-        //private void OnPasswordTextChangedExecuted(object param = null)
-        //{
-        //    _EqualPasswordsColor = Equals(_InRegPassword, _InRegConfirmPassword) ? MaterialDesignColors.MaterialDesignColor.Green :
-        //        MaterialDesignColors.MaterialDesignColor.Red;
-        //}
-
-        //private bool CanPasswordTextChangedExecute(object param = null) => true;
-
         #endregion
 
         public AuthViewModel()
         {
             #region Commands initialization
             SelectTabCommand = new LambdaCommand(OnSelectTabCommandExecuted, CanSelectTabCommandExecute);
-            //SelectTabCommand = new LambdaCommand(OnPasswordTextChangedExecuted, CanPasswordTextChangedExecute);
             #endregion
         }
     }

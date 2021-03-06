@@ -6,6 +6,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <None Remove="Properties\Resources\password.ttf" />
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.3" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="5.0.3" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.3">
@@ -21,6 +25,10 @@
     <ItemGroup>
       <ProjectReference Include="..\Libs\DottApp.RsaAesWrapper\DottApp.RsaAesWrapper.csproj" />
       <ProjectReference Include="..\Libs\DottApp.Services.Auth\DottApp.Services.Auth.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Resource Include="Properties\Resources\password.ttf" />
     </ItemGroup>
 
 </Project>
