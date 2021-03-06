@@ -25,6 +25,12 @@ namespace DottApp.WebAPI.Controllers
             _context = context;
         }
 
+        [HttpGet("IsLoginFree")]
+        public bool Get(string login) =>
+            _context.Users.Where(a => a.LoginName == login).ToArray().Length == 0;
+
+
+
         [HttpPost("NewConnectSession")]
         public ConnectionSessionResponse Post([FromBody]ConnectionSessionRequest csRequest)
         {

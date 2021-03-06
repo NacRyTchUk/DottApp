@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DottApp.Api.Rest\DottApp.Api.Rest.csproj" />
+    <ProjectReference Include="..\DottApp.RsaAesWrapper\DottApp.RsaAesWrapper.csproj" />
+    <ProjectReference Include="..\DottApp.Services.Auth\DottApp.Services.Auth.csproj" />
+    <ProjectReference Include="..\RESTw\DottApp.RestWrapper.csproj" />
+  </ItemGroup>
+
+</Project>

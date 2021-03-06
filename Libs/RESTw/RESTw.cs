@@ -38,5 +38,8 @@ namespace DottApp.RestWrapper
             return resp.IsSuccessful ? JsonSerializer.Deserialize<TResponse>(resp.Content) : 
                     throw new DAException(DAExceptionType.UnknownError, resp.ErrorMessage);
         }
+
+        public RestClient GetClient() => client;
+
     }
 }
