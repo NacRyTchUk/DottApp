@@ -53,13 +53,15 @@ namespace DottApp.Client.ViewModels
 
             switch (Convert.ToInt32(param))
             {
-                case 1: { new MainWindow().Show(); break; }
-                case 2: { new DebugWindow().Show(); break; }
-                case 3: { new TestWindow().Show(); break; }
+                case 1 : { new MainWindow().Show(); break; }
+                case 2 : { new DebugWindow().Show(); break; }
+                case 3 : { new TestWindow().Show(); break; }
+                case 4 : { new AuthWindow().Show(); break; }
             }
         }
 
         private bool CanOpenWindowCommandExecute(object param) => true;
+
 
 
         #endregion
@@ -68,7 +70,7 @@ namespace DottApp.Client.ViewModels
         {
             #region Commands initialization
             OpenWindowCommand = new LambdaCommand(OnOpenWindowCommandExecuted, CanOpenWindowCommandExecute);
-
+            
 
             #endregion
         }

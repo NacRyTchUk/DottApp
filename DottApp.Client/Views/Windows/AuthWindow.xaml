@@ -1,0 +1,254 @@
+﻿<Window x:Class="DottApp.Client.Views.Windows.AuthWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DottApp.Client.Views.Windows"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:domain="clr-namespace:DottApp.Client.Domain"
+        mc:Ignorable="d"
+        xmlns:vm="clr-namespace:DottApp.Client.ViewModels"
+        Title="AuthWindow"
+        Height="591"
+        Width="502"
+        Background="{DynamicResource MaterialDesignPaper}"
+        WindowStyle="SingleBorderWindow"
+        Style="{DynamicResource MaterialDesignStepIconContentControl}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        FontSize="16"
+        Foreground="{DynamicResource MaterialDesignDarkForeground}">
+    <Window.DataContext>
+        <vm:AuthViewModel />
+    </Window.DataContext>
+    <DockPanel>
+        <TabControl SelectedIndex="{Binding SelectedTabNum}"
+                    x:Name="SignIn_Registration_TabControl"
+                    Style="{DynamicResource MaterialDesignAppBarTabControl}">
+            <TabItem TabIndex="0"
+                     Visibility="Collapsed"
+                     Header="Sign In">
+                <Grid>
+                    <StackPanel Width="250"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+                        <TextBlock Foreground="{DynamicResource MaterialDesignDarkForeground}"
+                                   DockPanel.Dock="Top"
+                                   HorizontalAlignment="Center"
+                                   Text="Sign in"
+                                   Style="{DynamicResource MaterialDesignTextBlock}"
+                                   FontSize="40" />
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Account"
+                                                     VerticalAlignment="Center"
+                                                     Foreground="{DynamicResource MaterialDesignDarkForeground}"></materialDesign:PackIcon>
+                            <TextBlock Foreground="{DynamicResource MaterialDesignDarkForeground}"
+                                       Margin="5 0"
+                                       Text="Login"
+                                       Style="{DynamicResource MaterialDesignTextBlock}"
+                                       FontSize="20">
+                            </TextBlock>
+                        </StackPanel>
+                        <TextBox x:Name="LoginTextBox"
+                                 Foreground="{DynamicResource MaterialDesignDarkForeground}"
+                                 Style="{DynamicResource MaterialDesignTextBox}"
+                                 Height="40"
+                                 FontSize="26"
+                                 MaxLength="26">
+                            <Binding Path="Login"
+                                     UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <domain:NotEmptyValidationRule ValidatesOnTargetUpdated="False" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox>
+                        <StackPanel Margin="0 20 0 0"
+                                    Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Key"
+                                                     Foreground="{DynamicResource MaterialDesignDarkForeground}"
+                                                     VerticalAlignment="Center"></materialDesign:PackIcon>
+                            <TextBlock Foreground="{DynamicResource MaterialDesignDarkForeground}"
+                                       Margin="5 0"
+                                       Text="Password"
+                                       Style="{DynamicResource MaterialDesignTextBlock}"
+                                       FontSize="20">
+                            </TextBlock>
+                        </StackPanel>
+                        <TextBox x:Name="InPasswordTextBox"
+                                 Foreground="{DynamicResource MaterialDesignDarkForeground}"
+                                 Style="{DynamicResource MaterialDesignTextBox}"
+                                 Height="40"
+                                 FontSize="26"
+                                 FontFamily="pack://application:,,,/Properties/Resources/#password">
+                            <Binding Path="InPassword"
+                                     UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <domain:NotEmptyValidationRule ValidatesOnTargetUpdated="False" />
+                                    <domain:NotTooLong ValidatesOnTargetUpdated="False" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                            <!--Disable Context Menu-->
+                            <TextBox.ContextMenu>
+                                <ContextMenu IsEnabled="False"/>
+                            </TextBox.ContextMenu>
+                            <TextBox.InputBindings>
+                                <!--Disable CTRL+C-->
+                                <KeyBinding Command="ApplicationCommands.NotACommand"
+                                            Key="X"
+                                            Modifiers="Control" />
+                                <KeyBinding Command="ApplicationCommands.NotACommand"
+                                            Key="C"
+                                            Modifiers="Control" />
+                            </TextBox.InputBindings>
+                        </TextBox>
+                        <Button Style="{DynamicResource MaterialDesignFlatButton}"
+                                Margin="45 25 45 0"
+                                Command="{Binding SelectTabCommand}"
+                                CommandParameter="1">I am not registered</Button>
+                        <Button Margin="45 10"
+                                IsDefault="True">Enter</Button>
+
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem TabIndex="1"
+                     Visibility="Collapsed"
+                     Header="Registration">
+                <Grid>
+                    <StackPanel Width="250"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+                        <TextBlock Foreground="{DynamicResource MaterialDesignDarkForeground}"
+                                   DockPanel.Dock="Top"
+                                   HorizontalAlignment="Center"
+                                   Text="Registration"
+                                   Style="{DynamicResource MaterialDesignTextBlock}"
+                                   FontSize="40" />
+                        <TextBlock Foreground="{DynamicResource MaterialDesignDarkForeground}"
+                                   Margin="0 10 0 0"
+                                   Text="Create a login"
+                                   Style="{DynamicResource MaterialDesignTextBlock}"
+                                   FontSize="20">
+                        </TextBlock>
+                        <TextBox x:Name="LoginRegTextBox"
+                                 Foreground="{DynamicResource MaterialDesignDarkForeground}"
+                                 Style="{DynamicResource MaterialDesignTextBox}"
+                                 Height="40"
+                                 FontSize="26"
+                                 MaxLength="26">
+                            <Binding Path="RegLogin"
+                                     UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <domain:NotEmptyValidationRule ValidatesOnTargetUpdated="False" />
+                                    <domain:NotTooShort ValidatesOnTargetUpdated="False" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox>
+                        <TextBlock Foreground="{DynamicResource MaterialDesignDarkForeground}"
+                                   Margin="0 15 0 0"
+                                   Text="Create a nickname"
+                                   Style="{DynamicResource MaterialDesignTextBlock}"
+                                   FontSize="20">
+                        </TextBlock>
+                        <TextBox  x:Name="NicknameRegTextBox"
+                                  Foreground="{DynamicResource MaterialDesignDarkForeground}"
+                                  Style="{DynamicResource MaterialDesignTextBox}"
+                                  Height="40"
+                                  FontSize="26"
+                                  MaxLength="26">
+                            <Binding Path="NickName"
+                                     UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <domain:NotEmptyValidationRule ValidatesOnTargetUpdated="False" />
+                                    <domain:NotTooShort ValidatesOnTargetUpdated="False" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox>
+                        <TextBlock Foreground="{DynamicResource MaterialDesignDarkForeground}"
+                                   Margin="0 15 0 0"
+                                   Text="Pick a password"
+                                   Style="{DynamicResource MaterialDesignTextBlock}"
+                                   FontSize="20">
+                        </TextBlock>
+                        <TextBox x:Name="RegPasswordTextBox"
+                                 Foreground="{DynamicResource MaterialDesignDarkForeground}"
+                                 Style="{DynamicResource MaterialDesignTextBox}"
+                                 Height="40"
+                                 FontSize="26"
+                                 FontFamily="pack://application:,,,/Properties/Resources/#password">
+                            <Binding Path="InRegPassword"
+                                     UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <domain:NotTooShort ValidatesOnTargetUpdated="False" />
+                                    <domain:NotTooLong ValidatesOnTargetUpdated="False" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                            <!--Disable Context Menu-->
+                            <TextBox.ContextMenu>
+                                <ContextMenu IsEnabled="False" />
+                            </TextBox.ContextMenu>
+                            <TextBox.InputBindings>
+                                <!--Disable CTRL+C-->
+                                <KeyBinding Command="ApplicationCommands.NotACommand"
+                                            Key="X"
+                                            Modifiers="Control" />
+                                <KeyBinding Command="ApplicationCommands.NotACommand"
+                                            Key="C"
+                                            Modifiers="Control" />
+                            </TextBox.InputBindings>
+                        </TextBox>
+                        <TextBlock Foreground="{DynamicResource MaterialDesignDarkForeground}"
+                                   Margin="0 15 0 0"
+                                   Text="Confirm password"
+                                   Style="{DynamicResource MaterialDesignTextBlock}"
+                                   FontSize="20">
+                        </TextBlock>
+                        <TextBox x:Name="PasswordConfirmTextBox"
+                                 Foreground="{DynamicResource MaterialDesignDarkForeground}"
+                                 Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
+                                 Height="55"
+                                 FontSize="26"
+                                 materialDesign:HintAssist.FloatingScale="0.5"
+                                 FontFamily="pack://application:,,,/Properties/Resources/#password"
+                                 Cursor="IBeam">
+                            <Binding Path="InRegConfirmPassword"
+                                     UpdateSourceTrigger="PropertyChanged">
+                            </Binding>
+                            <!--Disable Context Menu-->
+                            <TextBox.ContextMenu>
+                                <ContextMenu IsEnabled="False" />
+                            </TextBox.ContextMenu>
+                            <materialDesign:HintAssist.Foreground>
+                                <Binding Path="EqualPasswordsColor"
+                                         UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <domain:EqualPasswords ValidatesOnTargetUpdated="True" />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </materialDesign:HintAssist.Foreground>
+                            <materialDesign:TextFieldAssist.UnderlineBrush>
+                                <Binding Path="EqualPasswordsColor"
+                                         UpdateSourceTrigger="PropertyChanged">
+                                </Binding>
+                            </materialDesign:TextFieldAssist.UnderlineBrush>
+                            <TextBox.InputBindings>
+                                <!--Disable CTRL+C-->
+                                <KeyBinding Command="ApplicationCommands.NotACommand"
+                                            Key="X"
+                                            Modifiers="Control" />
+                                <KeyBinding Command="ApplicationCommands.NotACommand"
+                                            Key="C"
+                                            Modifiers="Control" />
+                            </TextBox.InputBindings>
+                        </TextBox>
+                        <Button Margin="45 25 45 0"
+                                IsDefault="True">Continue</Button>
+                        <Button Style="{DynamicResource MaterialDesignFlatButton}"
+                                Margin="45 10"
+                                Command="{Binding SelectTabCommand}"
+                                CommandParameter="0">Back</Button>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </DockPanel>
+</Window>
