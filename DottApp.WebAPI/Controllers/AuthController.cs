@@ -83,7 +83,7 @@ namespace DottApp.WebAPI.Controllers
                     LoginName = regRequest.LoginName,
                     NickName = regRequest.NickName
                 });
-
+                
                 var activeSession = _context.ActiveConnections.Find(sessionid);
                 activeSession.IsAuth = true;
                 activeSession.LoginName = regRequest.LoginName;
@@ -99,6 +99,36 @@ namespace DottApp.WebAPI.Controllers
             return new RegistrationResponse();
         }
 
+        [HttpPost("SignIn")]
+        public SigninResponse Post([FromBody] SigninRequest lognRequest, string sid)
+        {
+            Console.WriteLine("new re log");
+            Console.WriteLine(sid);
 
+            //var sessionid = _context.ActiveConnections.Where(cont => cont.SessionId == sid).ToArray()[0].Id;
+            //if (_context.Users.Where(user => user.LoginName == regRequest.LoginName).ToArray().Length == 0 &&
+            //    sessionid != 0)
+            //{
+            //    _context.Users.Add(new User()
+            //    {
+            //        LoginName = regRequest.LoginName,
+            //        NickName = regRequest.NickName
+            //    });
+
+            //    var activeSession = _context.ActiveConnections Find(sessionid);
+            //    activeSession.IsAuth = true;
+            //    activeSession.LoginName = regRequest.LoginName;
+            //    _context.SaveChanges();
+            //    Console.WriteLine("reg done");
+            //    return new RegistrationResponse()
+            //    {
+            //        AccessToken = new AESw(Convert.FromBase64String(activeSession.AesKey)).Encrypt(activeSession.AccessToken)
+            //    };
+            //}
+            //Console.WriteLine("reg fail");
+
+            //return new RegistrationResponse();
+            return new SigninResponse();
+        }
     }
 }

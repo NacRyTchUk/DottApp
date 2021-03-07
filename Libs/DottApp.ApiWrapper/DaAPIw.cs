@@ -64,10 +64,7 @@ namespace DottApp.ApiWrapper
             {
                 var res = JsonSerializer.Deserialize<ConnectionSessionResponse>(response.Content);
                 _sessionId = res.SessionId;
-                ProtectedStorage.Set(new PrivateData()
-                {
-                    AesKey = rsa.Decrypt(Convert.FromBase64String(res.Key), false)
-                });
+                ProtectedStorage.AesKey = Convert.FromBase64String(res.Key);
                 return  IsConnected = true;
             }
             catch (Exception)
@@ -92,11 +89,7 @@ namespace DottApp.ApiWrapper
             try
             {
                 var res = JsonSerializer.Deserialize<RegistrationResponse>(response.Content);
-                ProtectedStorage.Set(new PrivateData()
-                {
-                    AesKey = ProtectedStorage.Get().AesKey,
-                    AccessToken = res.AccessToken
-                });
+                ProtectedStorage.AccessToken = res.AccessToken;
                 return IsAuth = true;
             }
             catch (Exception)
