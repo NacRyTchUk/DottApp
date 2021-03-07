@@ -32,7 +32,7 @@ namespace DottApp.ApiWrapper
         }
 
 
-        static DaAPIw() => BaseUrl = "http://api.dottapp.nrtu.studio";
+        static DaAPIw() => BaseUrl = "https://api.dottapp.nrtu.studio";
 
         public static bool? IsLoginFree( string login)
         {

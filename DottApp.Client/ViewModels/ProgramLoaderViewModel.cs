@@ -52,11 +52,11 @@ namespace DottApp.Client.ViewModels
 
 
             //    DaAPIw.BaseUrl = ConfigurationManager.AppSettings["BaseDebugApiUrl"];
-            //    DaAPIw.Connect();
-            //    var nick = new Random().Next(0, 100).ToString();
+            //DaAPIw.Connect();
+            //var nick = new Random().Next(0, 100).ToString();
             ////    DaAPIw.SignIn(nick = "98", "12345");
-            //   DaAPIw.Registration(nick, "nick", "12345");
-            //    MessageBox.Show($"{nick} {DaAPIw.IsAuth.ToString()} {ProtectedStorage.AccessToken}");
+            //DaAPIw.Registration(nick, "nick", "12345");
+            //MessageBox.Show($"{nick} {DaAPIw.IsAuth.ToString()} {ProtectedStorage.AccessToken}");
 
 
 
