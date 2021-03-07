@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Security;
 using System.Security.Cryptography;
 using System.Text;
@@ -12,6 +13,8 @@ namespace DottApp.Services.Auth
     {
         private static byte[] _p_data;
         private static readonly byte[] _enthropy = Encoding.UTF8.GetBytes("api.dottapp.nrtu.studio");
+
+        static ProtectedStorage() => Set(new PrivateData());
         public static PrivateData Get() => JsonSerializer.Deserialize<PrivateData>(
             Encoding.UTF8.GetString(ProtectedData.
                 Unprotect(_p_data, _enthropy, DataProtectionScope.CurrentUser)));

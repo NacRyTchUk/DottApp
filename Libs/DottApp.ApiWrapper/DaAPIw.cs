@@ -3,7 +3,9 @@ using System.Net.Http;
 using System.Security;
 using System.Security.Cryptography;
 using System.Text.Json;
+using DottApp.Api.Rest;
 using DottApp.Api.Rest.Request_Response;
+using DottApp.RsaAesWrapper;
 using DottApp.Services.Auth;
 using RestSharp;
 
@@ -73,23 +75,27 @@ namespace DottApp.ApiWrapper
             }
         }
         
-        [SecurityCritical]
-        public static bool? Registration( string login,  string nick,  string passHash)
+       // [SecurityCritical]
+        public static bool? Registration( string login,  string nick,  string pass)
         {
             var isValidLogin = IsLoginFree(login);
             if (isValidLogin is null) return null;
             if (isValidLogin == false) return false;
             RestRequest request = new RestRequest("api/Auth/SignUp");
             request.AddParameter("sid", _sessionId, ParameterType.QueryString);
-            request.AddJsonBody(new RegistrationRequest()
+            AESw aesw = new AESw(ProtectedStorage.AesKey);
+            request.AddParameter("body", AesJson.Serialize(new RegistrationRequest()
             {
-                LoginName = login, NickName = nick, PasswordHash = passHash
-            });
+                LoginName = login,
+                NickName = nick,
+                Password = pass
+            }, aesw), ParameterType.RequestBody);
+
             var response = _client.Post(request);
             try
             {
                 var res = JsonSerializer.Deserialize<RegistrationResponse>(response.Content);
-                ProtectedStorage.AccessToken = res.AccessToken;
+                ProtectedStorage.AccessToken = new AESw(ProtectedStorage.AesKey).Decrypt(res.AccessToken);
                 return IsAuth = true;
             }
             catch (Exception)

@@ -7,6 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="BCrypt.Net-Next" Version="4.0.2" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.3" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="5.0.3" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.3">
@@ -23,6 +24,7 @@
       <ProjectReference Include="..\Libs\DottApp.Api.Rest\DottApp.Api.Rest.csproj" />
       <ProjectReference Include="..\Libs\DottApp.RsaAesWrapper\DottApp.RsaAesWrapper.csproj" />
       <ProjectReference Include="..\Libs\DottApp.Services.Auth\DottApp.Services.Auth.csproj" />
+      <ProjectReference Include="..\Libs\RESTw\DottApp.RestWrapper.csproj" />
     </ItemGroup>
 
     <ItemGroup>

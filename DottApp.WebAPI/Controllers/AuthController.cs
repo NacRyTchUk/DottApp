@@ -5,11 +5,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
+using DottApp.Api.Rest;
 using DottApp.Api.Rest.Request_Response;
 using DottApp.RsaAesWrapper;
 using DottApp.Services.Auth;
 using DottApp.WebAPI.Models;
+using Org.BouncyCastle.Crypto.Generators;
 using Org.BouncyCastle.Security;
 
 namespace DottApp.WebAPI.Controllers
@@ -26,13 +29,13 @@ namespace DottApp.WebAPI.Controllers
         }
 
         [HttpGet("IsLoginFree")]
-        public bool Get(string login) =>
+        public bool IsLoginFree(string login) =>
             _context.Users.Where(a => a.LoginName == login).ToArray().Length == 0;
 
 
 
         [HttpPost("Connect")]
-        public ConnectionSessionResponse Post([FromBody]ConnectionSessionRequest csRequest)
+        public ConnectionSessionResponse Connect([FromBody]ConnectionSessionRequest csRequest)
         {
             Console.WriteLine("new conenct");
 
@@ -69,66 +72,66 @@ namespace DottApp.WebAPI.Controllers
         }
 
         [HttpPost("SignUp")]
-        public RegistrationResponse Post([FromBody] RegistrationRequest regRequest, string sid)
+        public string SignUp([FromBody] string body, string sid)
         {
             Console.WriteLine("new re req");
             Console.WriteLine(sid);
-            
-            var sessionid =  _context.ActiveConnections.Where(cont => cont.SessionId == sid).ToArray()[0].Id;
+            var session =  _context.ActiveConnections.Last(cont => cont.SessionId == sid);
+            AESw aesw = new AESw(Convert.FromBase64String(session.AesKey));
+            var regRequest = AesJson.Deserialize<RegistrationRequest>(body, aesw);
+
             if (_context.Users.Where(user => user.LoginName == regRequest.LoginName).ToArray().Length == 0 &&
-                sessionid != 0)
+                session.Id != 0)
             {
                 _context.Users.Add(new User()
                 {
                     LoginName = regRequest.LoginName,
-                    NickName = regRequest.NickName
+                    NickName = regRequest.NickName,
+                    PasswordHash = regRequest.Password
                 });
                 
-                var activeSession = _context.ActiveConnections.Find(sessionid);
+                var activeSession = _context.ActiveConnections.Find(session.Id);
                 activeSession.IsAuth = true;
                 activeSession.LoginName = regRequest.LoginName;
                 _context.SaveChanges();
                 Console.WriteLine("reg done");
-                return new RegistrationResponse()
+                return AesJson.Serialize(new RegistrationResponse()
                 {
-                    AccessToken = new AESw(Convert.FromBase64String(activeSession.AesKey)).Encrypt(activeSession.AccessToken) 
-                };
+                    AccessToken = new AESw(Convert.FromBase64String(activeSession.AesKey)).Encrypt(activeSession.AccessToken)
+                }, aesw);
             } 
             Console.WriteLine("reg fail");
 
-            return new RegistrationResponse();
+            return string.Empty;
         }
 
         [HttpPost("SignIn")]
-        public SigninResponse Post([FromBody] SigninRequest lognRequest, string sid)
+        public string SignIn([FromBody] string body, string sid)
         {
             Console.WriteLine("new re log");
             Console.WriteLine(sid);
+            var session = _context.ActiveConnections.Last(cont => cont.SessionId == sid);
+            AESw aesw = new AESw(Convert.FromBase64String(session.AesKey));
+            var lognRequest = AesJson.Deserialize<SigninRequest>(body, aesw);
 
-            //var sessionid = _context.ActiveConnections.Where(cont => cont.SessionId == sid).ToArray()[0].Id;
-            //if (_context.Users.Where(user => user.LoginName == regRequest.LoginName).ToArray().Length == 0 &&
-            //    sessionid != 0)
-            //{
-            //    _context.Users.Add(new User()
-            //    {
-            //        LoginName = regRequest.LoginName,
-            //        NickName = regRequest.NickName
-            //    });
+            var sessionid = _context.ActiveConnections.Where(cont => cont.SessionId == sid).ToArray()[0].Id;
+            var user = _context.Users.Last(a => a.LoginName == lognRequest.LoginName);
+            if (user is null) return String.Empty;
+            if (BCrypt.Net.BCrypt.Verify(lognRequest.Password, user.PasswordHash))
+            {
+                var activeSession = _context.ActiveConnections.Find(sessionid);
+                activeSession.IsAuth = true;
+                activeSession.LoginName = lognRequest.LoginName;
+                _context.SaveChanges();
+                Console.WriteLine("log done");
+                return AesJson.Serialize(new SigninResponse()
+                {
+                    AccessToken = new AESw(Convert.FromBase64String(activeSession.AesKey)).Encrypt(activeSession.AccessToken)
+                }, aesw);
+            }
+            Console.WriteLine("log fail");
 
-            //    var activeSession = _context.ActiveConnections Find(sessionid);
-            //    activeSession.IsAuth = true;
-            //    activeSession.LoginName = regRequest.LoginName;
-            //    _context.SaveChanges();
-            //    Console.WriteLine("reg done");
-            //    return new RegistrationResponse()
-            //    {
-            //        AccessToken = new AESw(Convert.FromBase64String(activeSession.AesKey)).Encrypt(activeSession.AccessToken)
-            //    };
-            //}
-            //Console.WriteLine("reg fail");
-
-            //return new RegistrationResponse();
-            return new SigninResponse();
+            return String.Empty;
         }
     }
 }

@@ -49,15 +49,20 @@ namespace DottApp.Client.ViewModels
         private void OnOpenWindowCommandExecuted(object param)
         {
             if (param is null) return;
-
-
-            switch (Convert.ToInt32(param))
-            {
-                case 1: { new MainWindow().Show(); break; }
-                case 2: { new DebugWindow().Show(); break; }
-                case 3: { new TestWindow().Show(); break; }
-                case 4: { new AuthWindow().Show(); break; }
-            }
+            DaAPIw.BaseUrl = ConfigurationManager.AppSettings["BaseDebugApiUrl"];
+            DaAPIw.Connect();
+            MessageBox.Show(ProtectedStorage.AccessToken);
+            DaAPIw.Registration(new Random().Next(0,100).ToString(), "nick","12345");
+            MessageBox.Show(DaAPIw.IsAuth.ToString());
+            MessageBox.Show(ProtectedStorage.AccessToken);
+            
+            //switch (Convert.ToInt32(param))
+            //{
+            //    case 1: { new MainWindow().Show(); break; }
+            //    case 2: { new DebugWindow().Show(); break; }
+            //    case 3: { new TestWindow().Show(); break; }
+            //    case 4: { new AuthWindow().Show(); break; }
+            //}
         }
 
         private bool CanOpenWindowCommandExecute(object param) => true;

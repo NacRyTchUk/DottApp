@@ -10,5 +10,7 @@ namespace DottApp.WebAPI.Models
         public int Id { get; set; }
         public string LoginName { get; set; }
         public string NickName { get; set; }
+        public string PasswordHash { get; set; }
+        public string Salt { get; set; }
     }
 }

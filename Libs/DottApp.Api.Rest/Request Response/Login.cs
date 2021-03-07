@@ -7,7 +7,7 @@ namespace DottApp.Api.Rest.Request_Response
     public class SigninRequest : BaseRequest
     {
         public string LoginName { get; set; }
-        public string PasswordHash { get; set; }
+        public string Password { get; set; }
     }
 
     public class SigninResponse

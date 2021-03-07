@@ -197,7 +197,7 @@ namespace DottApp.Client.ViewModels
             {
                 LoginName = ApiRegLogin,
                 NickName = ApiRegNick,
-                PasswordHash = ApiRegPass
+                Password = ApiRegPass
             };
 
 
