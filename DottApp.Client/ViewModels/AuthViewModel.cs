@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Security;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using DottApp.ApiWrapper;
 using DottApp.Client.Infrastructure.Commands;
 using DottApp.Client.ViewModels.Base;
 using DottApp.Client.Views.Windows;
@@ -97,7 +99,29 @@ namespace DottApp.Client.ViewModels
 
         private bool CanSelectTabCommandExecute(object param) => true;
 
-        public ICommand PasswordTextChanged { get; }
+
+        public ICommand SignUpCommand { get; }
+
+        private void OnSignUpCommandExecuted(object param)
+        {
+            DaAPIw.Connect();
+            DaAPIw.Registration(RegLogin, NickName, InRegPassword);
+            MessageBox.Show(DaAPIw.IsAuth ? "Success!" : "Oh oh....");
+        }
+
+        private bool CanSignUpCommandExecute(object param) => true;
+
+
+        public ICommand SignInCommand { get; }
+
+        private void OnSignInCommandExecuted(object param)
+        {
+            DaAPIw.Connect();
+            DaAPIw.SignIn(Login, InPassword);
+            MessageBox.Show(DaAPIw.IsAuth ? "Success!" : "Oh oh....");
+        }
+
+        private bool CanSignInCommandExecute(object param) => true;
 
         #endregion
 
@@ -105,6 +129,8 @@ namespace DottApp.Client.ViewModels
         {
             #region Commands initialization
             SelectTabCommand = new LambdaCommand(OnSelectTabCommandExecuted, CanSelectTabCommandExecute);
+            SignUpCommand = new LambdaCommand(OnSignUpCommandExecuted, CanSignUpCommandExecute);
+            SignInCommand = new LambdaCommand(OnSignInCommandExecuted, CanSignInCommandExecute);
             #endregion
         }
     }

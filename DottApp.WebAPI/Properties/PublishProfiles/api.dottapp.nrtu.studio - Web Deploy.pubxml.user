@@ -16,35 +16,56 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="appsettings.json">
       <publishTime>02/25/2021 23:53:52</publishTime>
     </File>
+    <File Include="BCrypt.Net-Next.dll">
+      <publishTime>11/19/2020 10:27:06</publishTime>
+    </File>
+    <File Include="BouncyCastle.Crypto.dll">
+      <publishTime>02/19/2021 21:04:50</publishTime>
+    </File>
+    <File Include="DataBase/dottapp.main.db">
+      <publishTime>03/07/2021 22:26:00</publishTime>
+    </File>
+    <File Include="DottApp.Api.Rest.dll">
+      <publishTime>03/08/2021 00:53:22</publishTime>
+    </File>
+    <File Include="DottApp.Api.Rest.pdb">
+      <publishTime>03/08/2021 00:53:22</publishTime>
+    </File>
+    <File Include="DottApp.RestWrapper.dll">
+      <publishTime>03/08/2021 00:53:23</publishTime>
+    </File>
+    <File Include="DottApp.RestWrapper.pdb">
+      <publishTime>03/08/2021 00:53:23</publishTime>
+    </File>
     <File Include="DottApp.RsaAesWrapper.dll">
-      <publishTime>02/27/2021 23:16:49</publishTime>
+      <publishTime>03/08/2021 00:53:21</publishTime>
     </File>
     <File Include="DottApp.RsaAesWrapper.pdb">
-      <publishTime>02/27/2021 23:16:49</publishTime>
+      <publishTime>03/08/2021 00:53:21</publishTime>
     </File>
     <File Include="DottApp.Services.Auth.dll">
-      <publishTime>02/28/2021 03:39:32</publishTime>
+      <publishTime>03/08/2021 00:53:19</publishTime>
     </File>
     <File Include="DottApp.Services.Auth.pdb">
-      <publishTime>02/28/2021 03:39:32</publishTime>
+      <publishTime>03/08/2021 00:53:19</publishTime>
     </File>
     <File Include="DottApp.WebAPI.deps.json">
-      <publishTime>02/28/2021 04:46:47</publishTime>
+      <publishTime>03/08/2021 00:53:26</publishTime>
     </File>
     <File Include="DottApp.WebAPI.dll">
-      <publishTime>02/28/2021 04:46:46</publishTime>
+      <publishTime>03/08/2021 00:53:25</publishTime>
     </File>
     <File Include="DottApp.WebAPI.exe">
-      <publishTime>02/28/2021 04:46:46</publishTime>
+      <publishTime>03/08/2021 00:53:25</publishTime>
     </File>
     <File Include="DottApp.WebAPI.pdb">
-      <publishTime>02/28/2021 04:46:46</publishTime>
+      <publishTime>03/08/2021 00:53:25</publishTime>
     </File>
     <File Include="DottApp.WebAPI.runtimeconfig.json">
-      <publishTime>02/27/2021 23:16:52</publishTime>
+      <publishTime>03/08/2021 00:53:26</publishTime>
     </File>
     <File Include="Humanizer.dll">
-      <publishTime>06/02/2020 13:07:58</publishTime>
+      <publishTime>02/06/2020 13:07:58</publishTime>
     </File>
     <File Include="Microsoft.Data.SqlClient.dll">
       <publishTime>08/25/2020 23:24:48</publishTime>
@@ -73,11 +94,35 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Microsoft.EntityFrameworkCore.SqlServer.dll">
       <publishTime>01/14/2021 21:58:04</publishTime>
     </File>
+    <File Include="Microsoft.Extensions.Caching.Abstractions.dll">
+      <publishTime>10/19/2020 18:48:26</publishTime>
+    </File>
+    <File Include="Microsoft.Extensions.Caching.Memory.dll">
+      <publishTime>10/19/2020 18:48:36</publishTime>
+    </File>
+    <File Include="Microsoft.Extensions.Configuration.Abstractions.dll">
+      <publishTime>10/19/2020 18:48:28</publishTime>
+    </File>
+    <File Include="Microsoft.Extensions.DependencyInjection.Abstractions.dll">
+      <publishTime>10/19/2020 18:48:00</publishTime>
+    </File>
     <File Include="Microsoft.Extensions.DependencyInjection.dll">
-      <publishTime>11/26/2020 01:59:12</publishTime>
+      <publishTime>11/26/2020 01:59:08</publishTime>
     </File>
     <File Include="Microsoft.Extensions.DependencyModel.dll">
       <publishTime>10/19/2020 18:49:02</publishTime>
+    </File>
+    <File Include="Microsoft.Extensions.Logging.Abstractions.dll">
+      <publishTime>10/19/2020 18:48:04</publishTime>
+    </File>
+    <File Include="Microsoft.Extensions.Logging.dll">
+      <publishTime>10/19/2020 18:53:18</publishTime>
+    </File>
+    <File Include="Microsoft.Extensions.Options.dll">
+      <publishTime>10/19/2020 18:48:30</publishTime>
+    </File>
+    <File Include="Microsoft.Extensions.Primitives.dll">
+      <publishTime>10/19/2020 18:48:36</publishTime>
     </File>
     <File Include="Microsoft.Identity.Client.dll">
       <publishTime>05/18/2020 20:11:54</publishTime>
@@ -102,6 +147,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Newtonsoft.Json.dll">
       <publishTime>03/20/2017 20:03:18</publishTime>
+    </File>
+    <File Include="RestSharp.dll">
+      <publishTime>09/30/2020 21:10:06</publishTime>
     </File>
     <File Include="runtimes/alpine-x64/native/libe_sqlite3.so">
       <publishTime>08/28/2020 16:13:28</publishTime>
@@ -188,19 +236,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/15/2019 08:53:44</publishTime>
     </File>
     <File Include="runtimes/win/lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll">
-      <publishTime>11/15/2019 08:53:46</publishTime>
+      <publishTime>10/19/2020 18:49:30</publishTime>
     </File>
     <File Include="SQLitePCLRaw.batteries_v2.dll">
-      <publishTime>09/03/2020 17:13:26</publishTime>
+      <publishTime>03/09/2020 17:13:26</publishTime>
     </File>
     <File Include="SQLitePCLRaw.core.dll">
-      <publishTime>09/03/2020 17:13:04</publishTime>
+      <publishTime>03/09/2020 17:13:04</publishTime>
     </File>
     <File Include="SQLitePCLRaw.nativelibrary.dll">
-      <publishTime>09/03/2020 17:13:02</publishTime>
+      <publishTime>03/09/2020 17:13:02</publishTime>
     </File>
     <File Include="SQLitePCLRaw.provider.dynamic_cdecl.dll">
-      <publishTime>09/03/2020 17:13:18</publishTime>
+      <publishTime>03/09/2020 17:13:18</publishTime>
     </File>
     <File Include="Swashbuckle.AspNetCore.Swagger.dll">
       <publishTime>09/23/2020 12:47:20</publishTime>
@@ -210,6 +258,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Swashbuckle.AspNetCore.SwaggerUI.dll">
       <publishTime>09/23/2020 12:47:24</publishTime>
+    </File>
+    <File Include="System.Collections.Immutable.dll">
+      <publishTime>10/19/2020 18:37:40</publishTime>
+    </File>
+    <File Include="System.ComponentModel.Annotations.dll">
+      <publishTime>10/19/2020 18:37:54</publishTime>
     </File>
     <File Include="System.Configuration.ConfigurationManager.dll">
       <publishTime>11/15/2019 08:37:04</publishTime>
@@ -227,10 +281,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/15/2019 08:37:36</publishTime>
     </File>
     <File Include="System.Security.Cryptography.ProtectedData.dll">
-      <publishTime>11/15/2019 08:37:42</publishTime>
+      <publishTime>10/19/2020 18:52:26</publishTime>
+    </File>
+    <File Include="System.Text.Encodings.Web.dll">
+      <publishTime>10/19/2020 18:46:56</publishTime>
+    </File>
+    <File Include="System.Text.Json.dll">
+      <publishTime>10/19/2020 18:47:22</publishTime>
     </File>
     <File Include="web.config">
-      <publishTime>02/28/2021 04:46:47</publishTime>
+      <publishTime>03/08/2021 00:53:31</publishTime>
     </File>
   </ItemGroup>
 </Project>

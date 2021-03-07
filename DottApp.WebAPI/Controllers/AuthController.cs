@@ -31,6 +31,24 @@ namespace DottApp.WebAPI.Controllers
         public bool IsLoginFree(string login) =>
             _context.Users.Where(a => a.LoginName == login).ToArray().Length == 0;
 
+        [HttpGet("ConnectList")]
+        public List<string> ConnectList()
+        {
+            List<string> res = new List<string>();
+            foreach (var connect in _context.ActiveConnections)
+                res.Add(connect.LoginName);
+            return res;
+        }
+
+        [HttpGet("AuthUsersList")]
+        public List<string> AuthUsersList()
+        {
+            List<string> res = new List<string>();
+            foreach (var connect in _context.ActiveConnections.Where(a=>a.IsAuth == true))
+                res.Add(connect.LoginName);
+            return res;
+        }
+
 
 
         [HttpPost("Connect")]
@@ -129,5 +147,7 @@ namespace DottApp.WebAPI.Controllers
 
             return new SigninResponse();
         }
+
+        
     }
 }

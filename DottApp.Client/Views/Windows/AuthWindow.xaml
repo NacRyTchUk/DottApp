@@ -105,7 +105,7 @@
                                 Command="{Binding SelectTabCommand}"
                                 CommandParameter="1">I am not registered</Button>
                         <Button Margin="45 10"
-                                IsDefault="True">Enter</Button>
+                                IsDefault="True" Command="{ Binding SignInCommand}">Enter</Button>
 
                     </StackPanel>
                 </Grid>
@@ -241,11 +241,11 @@
                             </TextBox.InputBindings>
                         </TextBox>
                         <Button Margin="45 25 45 0"
-                                IsDefault="True">Continue</Button>
+                                IsDefault="True" Command="{Binding SignUpCommand}">Continue</Button>
                         <Button Style="{DynamicResource MaterialDesignFlatButton}"
                                 Margin="45 10"
                                 Command="{Binding SelectTabCommand}"
-                                CommandParameter="0">Back</Button>
+                                CommandParameter="0" >Back</Button>
                     </StackPanel>
                 </Grid>
             </TabItem>
