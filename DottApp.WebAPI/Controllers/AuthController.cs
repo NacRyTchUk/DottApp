@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 using DottApp.Api.Rest;
 using DottApp.Api.Rest.Request_Response;
@@ -63,7 +62,7 @@ namespace DottApp.WebAPI.Controllers
                 SessionId = sid,
                 ConnectionDate = DateTime.Now,
                 IsAuth = false,
-                AesKey = Convert.ToBase64String(new AESw().Key)
+                AesKey = Convert.ToBase64String(aesw.Key)
             });
             _context.SaveChanges();
 
@@ -72,66 +71,63 @@ namespace DottApp.WebAPI.Controllers
         }
 
         [HttpPost("SignUp")]
-        public string SignUp([FromBody] string body, string sid)
+        public RegistrationResponse SignUp([FromBody] RegistrationRequest regRequest, string sid)
         {
             Console.WriteLine("new re req");
             Console.WriteLine(sid);
-            var session =  _context.ActiveConnections.Last(cont => cont.SessionId == sid);
+            var session = _context.ActiveConnections.Where(cont => cont.SessionId == sid).OrderBy(a => a.Id).Last();
             AESw aesw = new AESw(Convert.FromBase64String(session.AesKey));
-            var regRequest = AesJson.Deserialize<RegistrationRequest>(body, aesw);
 
             if (_context.Users.Where(user => user.LoginName == regRequest.LoginName).ToArray().Length == 0 &&
                 session.Id != 0)
             {
-                _context.Users.Add(new User()
+                var hashSalt = BCrypt.Net.BCrypt.GenerateSalt();
+                var newUser = _context.Users.Add(new User()
                 {
-                    LoginName = regRequest.LoginName,
-                    NickName = regRequest.NickName,
-                    PasswordHash = regRequest.Password
+                    LoginName = aesw.Decrypt(regRequest.LoginName),
+                    NickName = aesw.Decrypt(regRequest.NickName),
+                    Salt = hashSalt,
+                    PasswordHash = BCrypt.Net.BCrypt.HashPassword(aesw.Decrypt(regRequest.Password)+ hashSalt)
                 });
                 
-                var activeSession = _context.ActiveConnections.Find(session.Id);
-                activeSession.IsAuth = true;
-                activeSession.LoginName = regRequest.LoginName;
+                session.IsAuth = true;
+                session.LoginName = newUser.Entity.LoginName;
                 _context.SaveChanges();
                 Console.WriteLine("reg done");
-                return AesJson.Serialize(new RegistrationResponse()
+                return new RegistrationResponse()
                 {
-                    AccessToken = new AESw(Convert.FromBase64String(activeSession.AesKey)).Encrypt(activeSession.AccessToken)
-                }, aesw);
+                    AccessToken = aesw.Encrypt(session.AccessToken) 
+                };
             } 
             Console.WriteLine("reg fail");
 
-            return string.Empty;
+            return new RegistrationResponse();
         }
 
         [HttpPost("SignIn")]
-        public string SignIn([FromBody] string body, string sid)
+        public SigninResponse SignIn([FromBody] SigninRequest lognRequest, string sid)
         {
             Console.WriteLine("new re log");
-            Console.WriteLine(sid);
-            var session = _context.ActiveConnections.Last(cont => cont.SessionId == sid);
-            AESw aesw = new AESw(Convert.FromBase64String(session.AesKey));
-            var lognRequest = AesJson.Deserialize<SigninRequest>(body, aesw);
 
-            var sessionid = _context.ActiveConnections.Where(cont => cont.SessionId == sid).ToArray()[0].Id;
-            var user = _context.Users.Last(a => a.LoginName == lognRequest.LoginName);
-            if (user is null) return String.Empty;
-            if (BCrypt.Net.BCrypt.Verify(lognRequest.Password, user.PasswordHash))
+            var session = _context.ActiveConnections.Where(cont => cont.SessionId == sid).ToArray()[0];
+            AESw aesw = new AESw(Convert.FromBase64String(session.AesKey));
+            var loginName = aesw.Decrypt(lognRequest.LoginName);
+            var user = _context.Users.Where(a => a.LoginName == loginName).ToArray()[0];
+            if (user is null) return new SigninResponse();
+            if (BCrypt.Net.BCrypt.Verify(aesw.Decrypt(lognRequest.Password) + user.Salt, user.PasswordHash))
             {
-                var activeSession = _context.ActiveConnections.Find(sessionid);
-                activeSession.IsAuth = true;
-                activeSession.LoginName = lognRequest.LoginName;
+                session.IsAuth = true;
+                session.LoginName = loginName;
                 _context.SaveChanges();
-                Console.WriteLine("log done");
-                return AesJson.Serialize(new SigninResponse()
+                Console.WriteLine("log done " + session.AccessToken);
+                return new SigninResponse()
                 {
-                    AccessToken = new AESw(Convert.FromBase64String(activeSession.AesKey)).Encrypt(activeSession.AccessToken)
-                }, aesw);
+                    AccessToken = aesw.Encrypt(session.AccessToken)
+                };
             }
             Console.WriteLine("log fail");
 
-            return String.Empty;
+            return new SigninResponse();
         }
     }
 }

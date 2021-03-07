@@ -41,7 +41,7 @@ namespace DottApp.RsaAesWrapper
         {
             _aes.Key = key;
             byte[] encrypted;
-            ICryptoTransform crypt = _aes.CreateEncryptor(_aes.Key, _aes.IV);
+            ICryptoTransform crypt = _aes.CreateEncryptor(_aes.Key, new byte[16]);
             using (MemoryStream ms = new MemoryStream())
             {
                 using (CryptoStream cs = new CryptoStream(ms, crypt, CryptoStreamMode.Write))
@@ -75,7 +75,7 @@ namespace DottApp.RsaAesWrapper
         {
             _aes.Key = key;
             string text = string.Empty;
-            ICryptoTransform crypt = _aes.CreateDecryptor(_aes.Key, _aes.IV);
+            ICryptoTransform crypt = _aes.CreateDecryptor(_aes.Key, new byte[16]);
             using (MemoryStream ms = new MemoryStream(Convert.FromBase64String(data)))
             {
                 using (CryptoStream cs = new CryptoStream(ms, crypt, CryptoStreamMode.Read))

@@ -3,7 +3,6 @@ using System.Net.Http;
 using System.Security;
 using System.Security.Cryptography;
 using System.Text.Json;
-using DottApp.Api.Rest;
 using DottApp.Api.Rest.Request_Response;
 using DottApp.RsaAesWrapper;
 using DottApp.Services.Auth;
@@ -56,7 +55,7 @@ namespace DottApp.ApiWrapper
         public static bool? Connect()
         {
             RestRequest request = new RestRequest("api/Auth/Connect");
-            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(2048);
+            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
             request.AddJsonBody(new ConnectionSessionRequest()
             {
                 Key = RSAKeys.ExportPublicKey(rsa)
@@ -66,7 +65,7 @@ namespace DottApp.ApiWrapper
             {
                 var res = JsonSerializer.Deserialize<ConnectionSessionResponse>(response.Content);
                 _sessionId = res.SessionId;
-                ProtectedStorage.AesKey = Convert.FromBase64String(res.Key);
+                ProtectedStorage.AesKey = rsa.Decrypt(Convert.FromBase64String(res.Key), false);
                 return  IsConnected = true;
             }
             catch (Exception)
@@ -82,20 +81,43 @@ namespace DottApp.ApiWrapper
             if (isValidLogin is null) return null;
             if (isValidLogin == false) return false;
             RestRequest request = new RestRequest("api/Auth/SignUp");
-            request.AddParameter("sid", _sessionId, ParameterType.QueryString);
             AESw aesw = new AESw(ProtectedStorage.AesKey);
-            request.AddParameter("body", AesJson.Serialize(new RegistrationRequest()
+            request.AddParameter("sid", _sessionId, ParameterType.QueryString);
+            request.AddJsonBody(new RegistrationRequest()
             {
-                LoginName = login,
-                NickName = nick,
-                Password = pass
-            }, aesw), ParameterType.RequestBody);
-
+                LoginName = aesw.Encrypt(login), NickName = aesw.Encrypt(nick), Password = aesw.Encrypt(pass)
+            });
             var response = _client.Post(request);
             try
             {
                 var res = JsonSerializer.Deserialize<RegistrationResponse>(response.Content);
-                ProtectedStorage.AccessToken = new AESw(ProtectedStorage.AesKey).Decrypt(res.AccessToken);
+                ProtectedStorage.AccessToken = aesw.Decrypt(res.AccessToken);
+                return IsAuth = true;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public static bool? SignIn(string login, string pass)
+        {
+            var isLoginFree = IsLoginFree(login);
+            if (isLoginFree is null) return null;
+            if (isLoginFree == true) return false;
+            RestRequest request = new RestRequest("api/Auth/SignIn");
+            AESw aesw = new AESw(ProtectedStorage.AesKey);
+            request.AddParameter("sid", _sessionId, ParameterType.QueryString);
+            request.AddJsonBody(new SigninRequest()
+            {
+                LoginName = aesw.Encrypt(login),
+                Password = aesw.Encrypt(pass)
+            });
+            var response = _client.Post(request);
+            try
+            {
+                var res = JsonSerializer.Deserialize<SigninResponse>(response.Content);
+                ProtectedStorage.AccessToken = aesw.Decrypt(res.AccessToken);
                 return IsAuth = true;
             }
             catch (Exception)

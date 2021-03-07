@@ -49,13 +49,17 @@ namespace DottApp.Client.ViewModels
         private void OnOpenWindowCommandExecuted(object param)
         {
             if (param is null) return;
+
+
             DaAPIw.BaseUrl = ConfigurationManager.AppSettings["BaseDebugApiUrl"];
             DaAPIw.Connect();
-            MessageBox.Show(ProtectedStorage.AccessToken);
-            DaAPIw.Registration(new Random().Next(0,100).ToString(), "nick","12345");
-            MessageBox.Show(DaAPIw.IsAuth.ToString());
-            MessageBox.Show(ProtectedStorage.AccessToken);
-            
+            var nick = new Random().Next(0, 100).ToString();
+            DaAPIw.SignIn(nick = "76", "1235");
+         //  DaAPIw.Registration(nick, "nick", "12345");
+            MessageBox.Show($"{nick} {DaAPIw.IsAuth.ToString()} {ProtectedStorage.AccessToken}");
+
+
+
             //switch (Convert.ToInt32(param))
             //{
             //    case 1: { new MainWindow().Show(); break; }
