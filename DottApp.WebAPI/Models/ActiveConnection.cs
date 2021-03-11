@@ -9,7 +9,10 @@ namespace DottApp.WebAPI.Models
     {
         public int Id { get; set; }
         public string AccessToken { get; set; }
+        public string SessionId { get; set; }
+        public bool IsAuth { get; set; }
         public string LoginName { get; set; }
+        public string AesKey { get; set; }
         public DateTime ConnectionDate { get; set; }
     }
 }

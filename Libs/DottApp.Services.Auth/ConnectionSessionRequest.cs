@@ -50,8 +50,8 @@ namespace DottApp.Services.Auth
 
     public class ConnectionSessionRequest
     {
-        [JsonPropertyName("publicKey")]
-        public string PublicKey { get; set;  }
+        [JsonPropertyName("key")]
+        public string Key { get; set;  }
         [JsonPropertyName("isFirstTime")]
         public bool IsFirstTime { get; set; } 
     }

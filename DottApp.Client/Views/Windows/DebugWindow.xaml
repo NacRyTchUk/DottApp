@@ -21,7 +21,7 @@
     <DockPanel>
         <TabControl  Style="{DynamicResource MaterialDesignTabControl}">
             <TabItem Header="API">
-                <TabControl  Style="{DynamicResource MaterialDesignTabControl}" HorizontalAlignment="Stretch" Width="800" VerticalAlignment="Stretch" >
+                <TabControl Style="{DynamicResource MaterialDesignTabControl}" HorizontalAlignment="Left" Width="800" >
                     <TabItem Header="Connect">
                         <Grid>
                             <StackPanel Margin="10,10,10,10">
@@ -38,7 +38,7 @@
                                     MaxWidth="400" Height="auto" 
                                     Text="{Binding ApiConnectRequestText}" FontWeight="Bold" Foreground="#BCFFFFFF" 
                                     Margin="10,10,10,10"/>
-                                    
+                                
                                 <StackPanel Orientation="Horizontal">
                                     <Button Content="Generate request" Width="auto"  Margin="10,10,10,10" Command="{Binding GenerateRequestCommand }"/>
                                     <Button Content="Send request" Width="auto"  Margin="10,10,10,10" Command="{Binding SendRequestCommand }"/>
@@ -60,6 +60,30 @@
 
                             </StackPanel>
                         </Grid>
+                    </TabItem>
+                    <TabItem Header ="SingUp">
+                       <Grid>
+                           <StackPanel Margin="16 16 16 16">
+                                <TextBox Width="181" HorizontalAlignment="Left"
+                                         Style="{DynamicResource MaterialDesignOutlinedTextBox}" Text="{Binding ApiRegLogin}"/>
+                               <TextBox Width="181" HorizontalAlignment="Left"
+                                        Style="{DynamicResource MaterialDesignOutlinedTextBox}" Text="{Binding ApiRegNick}"/>
+                               <TextBox Width="181" HorizontalAlignment="Left"
+                                        Style="{DynamicResource MaterialDesignOutlinedTextBox}" Text="{Binding ApiRegPass}"/>
+                               <Button HorizontalAlignment="Left" Command="{Binding SendRegRequestCommand }" Style="{DynamicResource MaterialDesignToolButton}" >Send</Button>
+                               <TextBox 
+                                   Style="{DynamicResource MaterialDesignOutlinedTextBox}"
+                                   TextWrapping="Wrap"
+                                   HorizontalAlignment="Left" VerticalAlignment="Top"
+                                   MinWidth="280"
+                                   AcceptsReturn="True"
+                                   VerticalScrollBarVisibility="Auto"
+                                   SpellCheck.IsEnabled="True"
+                                   MaxWidth="400" Height="155" 
+                                   Text="{Binding ApiRegResponseText}" 
+                                   FontWeight="Bold" Foreground="#BCFFFFFF" Margin="10,10,10,10"/>
+                            </StackPanel>
+                       </Grid> 
                     </TabItem>
                 </TabControl>
             </TabItem>

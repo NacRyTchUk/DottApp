@@ -40,6 +40,7 @@ namespace DottApp.WebAPI
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "DottApp.WebAPI", Version = "v1"});
             });
 
+            services.AddScoped<AuthController>();
 
         }
 

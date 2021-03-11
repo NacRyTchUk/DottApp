@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Text;
 using System.Windows;
 using System.Windows.Input;
+using DottApp.ApiWrapper;
 using DottApp.Client.Infrastructure.Commands;
 using DottApp.Client.Properties;
 using DottApp.Client.ViewModels.Base;
@@ -50,16 +51,26 @@ namespace DottApp.Client.ViewModels
             if (param is null) return;
 
 
+            //    DaAPIw.BaseUrl = ConfigurationManager.AppSettings["BaseDebugApiUrl"];
+            //DaAPIw.Connect();
+            //var nick = new Random().Next(0, 100).ToString();
+            ////    DaAPIw.SignIn(nick = "98", "12345");
+            //DaAPIw.Registration(nick, "nick", "12345");
+            //MessageBox.Show($"{nick} {DaAPIw.IsAuth.ToString()} {ProtectedStorage.AccessToken}");
+
+
 
             switch (Convert.ToInt32(param))
             {
                 case 1: { new MainWindow().Show(); break; }
                 case 2: { new DebugWindow().Show(); break; }
                 case 3: { new TestWindow().Show(); break; }
+                case 4: { new AuthWindow().Show(); break; }
             }
         }
 
         private bool CanOpenWindowCommandExecute(object param) => true;
+
 
 
         #endregion
@@ -68,7 +79,7 @@ namespace DottApp.Client.ViewModels
         {
             #region Commands initialization
             OpenWindowCommand = new LambdaCommand(OnOpenWindowCommandExecuted, CanOpenWindowCommandExecute);
-
+            
 
             #endregion
         }
