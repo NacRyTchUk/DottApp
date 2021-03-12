@@ -63,9 +63,59 @@ namespace DottApp.Client.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Byte[].
         /// </summary>
+        internal static byte[] face1 {
+            get {
+                object obj = ResourceManager.GetObject("face1", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Byte[].
+        /// </summary>
+        internal static byte[] face2 {
+            get {
+                object obj = ResourceManager.GetObject("face2", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Byte[].
+        /// </summary>
+        internal static byte[] face3 {
+            get {
+                object obj = ResourceManager.GetObject("face3", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Byte[].
+        /// </summary>
+        internal static byte[] monstr {
+            get {
+                object obj = ResourceManager.GetObject("monstr", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Byte[].
+        /// </summary>
         internal static byte[] password {
             get {
                 object obj = ResourceManager.GetObject("password", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Byte[].
+        /// </summary>
+        internal static byte[] shakal {
+            get {
+                object obj = ResourceManager.GetObject("shakal", resourceCulture);
                 return ((byte[])(obj));
             }
         }

@@ -7,12 +7,16 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <None Remove="Data\face1.jpg" />
+      <None Remove="Data\face2.jpg" />
+      <None Remove="Data\face3.png" />
+      <None Remove="Data\monstr.jpeg" />
+      <None Remove="Data\shakal.jpg" />
       <None Remove="Properties\Resources\password.ttf" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Data\" />
-      <Folder Include="Models\" />
+      <Folder Include="Resources\" />
       <Folder Include="Services\" />
     </ItemGroup>
 
@@ -65,6 +69,11 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Resource Include="Data\face1.jpg" />
+      <Resource Include="Data\face2.jpg" />
+      <Resource Include="Data\face3.png" />
+      <Resource Include="Data\monstr.jpeg" />
+      <Resource Include="Data\shakal.jpg" />
       <Resource Include="Properties\Resources\password.ttf" />
     </ItemGroup>
 
