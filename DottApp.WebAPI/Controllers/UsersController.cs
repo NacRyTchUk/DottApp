@@ -15,7 +15,7 @@ namespace DottApp.WebAPI.Controllers
         [HttpPost("GetUserInfo")]
         public UserInfo GetUserInfo(string sid)
         {
-
+            return new UserInfo();
         }
 
 

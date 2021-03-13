@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.Json;
 using DottApp.Services.Auth;
 
 namespace DottApp.RsaAesWrapper
@@ -88,6 +89,27 @@ namespace DottApp.RsaAesWrapper
             }
             _aes.GenerateKey();
             return text;
+        }
+
+        #endregion
+
+
+
+        #region Json
+
+        public  string Serialize<TObj>(TObj obj) => Encrypt(JsonSerializer.Serialize(obj));
+        public TObj Deserialize<TObj>(string aesText) where TObj : class
+        {
+            var jsonText = Decrypt(aesText);
+            try
+            {
+                var jsonBody = JsonSerializer.Deserialize<TObj>(jsonText);
+                return jsonBody;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         #endregion

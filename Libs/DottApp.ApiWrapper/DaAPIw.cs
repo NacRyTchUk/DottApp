@@ -83,15 +83,17 @@ namespace DottApp.ApiWrapper
             RestRequest request = new RestRequest("api/Auth/SignUp");
             AESw aesw = new AESw(ProtectedStorage.AesKey);
             request.AddParameter("sid", _sessionId, ParameterType.QueryString);
-            request.AddJsonBody(new RegistrationRequest()
+            request.AddParameter("body", aesw.Serialize(new RegistrationRequest()
             {
-                LoginName = aesw.Encrypt(login), NickName = aesw.Encrypt(nick), Password = aesw.Encrypt(pass)
-            });
-            var response = _client.Post(request);
+                LoginName = login, 
+                NickName = nick, 
+                Password = pass
+            }), ParameterType.QueryString);
+            var response = _client.Get(request);
             try
             {
-                var res = JsonSerializer.Deserialize<RegistrationResponse>(response.Content);
-                ProtectedStorage.AccessToken = aesw.Decrypt(res.AccessToken);
+                var res = aesw.Deserialize<RegistrationResponse>(response.Content);
+                ProtectedStorage.AccessToken = res.AccessToken;
                 return IsAuth = true;
             }
             catch (Exception)
@@ -108,16 +110,16 @@ namespace DottApp.ApiWrapper
             RestRequest request = new RestRequest("api/Auth/SignIn");
             AESw aesw = new AESw(ProtectedStorage.AesKey);
             request.AddParameter("sid", _sessionId, ParameterType.QueryString);
-            request.AddJsonBody(new SigninRequest()
+            request.AddParameter("body", aesw.Serialize(new SigninRequest()
             {
-                LoginName = aesw.Encrypt(login),
-                Password = aesw.Encrypt(pass)
-            });
-            var response = _client.Post(request);
+                LoginName = login,
+                Password = pass
+            }), ParameterType.QueryString);
+            var response = _client.Get(request);
             try
             {
-                var res = JsonSerializer.Deserialize<SigninResponse>(response.Content);
-                ProtectedStorage.AccessToken = aesw.Decrypt(res.AccessToken);
+                var res = aesw.Deserialize<SigninResponse>(response.Content);
+                ProtectedStorage.AccessToken = res.AccessToken;
                 return IsAuth = true;
             }
             catch (Exception)

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using DottApp.Api.Rest;
 using DottApp.Api.Rest.Request_Response;
@@ -88,24 +89,27 @@ namespace DottApp.WebAPI.Controllers
             return csResponse;
         }
 
-        [HttpPost("SignUp")]
-        public RegistrationResponse SignUp([FromBody] RegistrationRequest regRequest, string sid)
+        [HttpGet("SignUp")]
+        public string SignUp(string sid, string body)
         {
             Console.WriteLine("new re req");
             Console.WriteLine(sid);
+            Response.ContentType = "text/plain";
             var session = _context.ActiveConnections.Where(cont => cont.SessionId == sid).OrderBy(a => a.Id).Last();
             AESw aesw = new AESw(Convert.FromBase64String(session.AesKey));
-
+            
+            var regRequest = aesw.Deserialize<RegistrationRequest>(body);
+            
             if (_context.Users.Where(user => user.LoginName == regRequest.LoginName).ToArray().Length == 0 &&
                 session.Id != 0)
             {
                 var hashSalt = BCrypt.Net.BCrypt.GenerateSalt();
                 var newUser = _context.Users.Add(new User()
                 {
-                    LoginName = aesw.Decrypt(regRequest.LoginName),
-                    NickName = aesw.Decrypt(regRequest.NickName),
+                    LoginName = regRequest.LoginName,
+                    NickName = regRequest.NickName,
                     Salt = hashSalt,
-                    PasswordHash = BCrypt.Net.BCrypt.HashPassword(aesw.Decrypt(regRequest.Password) + hashSalt),
+                    PasswordHash = BCrypt.Net.BCrypt.HashPassword(regRequest.Password + hashSalt),
                     RegistrationDate = DateTime.Now,
                     LastOnline = DateTime.Now
                 });
@@ -114,39 +118,45 @@ namespace DottApp.WebAPI.Controllers
                 session.LoginName = newUser.Entity.LoginName;
                 _context.SaveChanges();
                 Console.WriteLine("reg done");
-                return new RegistrationResponse()
+                return aesw.Serialize(new RegistrationResponse()
                 {
-                    AccessToken = aesw.Encrypt(session.AccessToken) 
-                };
+                    AccessToken = session.AccessToken
+                });
             } 
             Console.WriteLine("reg fail");
-            return new RegistrationResponse();
+            return string.Empty;
         }
 
-        [HttpPost("SignIn")]
-        public SigninResponse SignIn([FromBody] SigninRequest lognRequest, string sid)
+        [HttpGet("SignIn")]
+        public string SignIn(string sid, string body)
         {
             Console.WriteLine("new re log");
-
+            Response.ContentType = "text/plain";
             var session = _context.ActiveConnections.Where(cont => cont.SessionId == sid).ToArray()[0];
             AESw aesw = new AESw(Convert.FromBase64String(session.AesKey));
-            var loginName = aesw.Decrypt(lognRequest.LoginName);
+
+            var loginRequest = aesw.Deserialize<SigninRequest>(body);
+
+            var loginName = loginRequest.LoginName;
+
             var user = _context.Users.Where(a => a.LoginName == loginName).ToArray()[0];
-            if (user is null) return new SigninResponse();
-            if (BCrypt.Net.BCrypt.Verify(aesw.Decrypt(lognRequest.Password) + user.Salt, user.PasswordHash))
+
+            if (user is null) return string.Empty;
+
+            if (BCrypt.Net.BCrypt.Verify(loginRequest.Password + user.Salt, user.PasswordHash))
             {
                 session.IsAuth = true;
                 session.LoginName = loginName;
                 _context.SaveChanges();
                 Console.WriteLine("log done " + session.AccessToken);
-                return new SigninResponse()
+                return aesw.Serialize(new SigninResponse()
                 {
-                    AccessToken = aesw.Encrypt(session.AccessToken)
-                };
+                    AccessToken = session.AccessToken
+                });
             }
             Console.WriteLine("log fail");
 
-            return new SigninResponse();
+            return string.Empty;
         }
 
         
