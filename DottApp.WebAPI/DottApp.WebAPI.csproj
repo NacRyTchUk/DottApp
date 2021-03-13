@@ -28,7 +28,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="DataBase\dottapp.main.db">
+      <None Update="DataBase\dottapp.main.old.db">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
     </ItemGroup>

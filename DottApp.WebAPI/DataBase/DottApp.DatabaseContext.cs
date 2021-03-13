@@ -16,5 +16,9 @@ namespace DottApp.WebAPI
 
         public DbSet<User> Users { get; set; }
         public DbSet<ActiveConnection> ActiveConnections { get; set; }
+        public DbSet<HistoryMessage> HistoryMessages { get; set; }
+        public DbSet<UnreachedMessage> UnreachedMessages { get; set; }
+        public DbSet<Chat> Chats { get; set; }
+        public DbSet<ChatMember> ChatMembers { get; set; }
     }
 }
