@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 namespace DottApp.Api.Rest.Request_Response
 {
 
-    public class RegistrationRequest : BaseRequest
+    public class RegistrationRequest 
     {
         [JsonPropertyName("loginName")]
         public string LoginName { get; set; }

@@ -105,7 +105,9 @@ namespace DottApp.WebAPI.Controllers
                     LoginName = aesw.Decrypt(regRequest.LoginName),
                     NickName = aesw.Decrypt(regRequest.NickName),
                     Salt = hashSalt,
-                    PasswordHash = BCrypt.Net.BCrypt.HashPassword(aesw.Decrypt(regRequest.Password)+ hashSalt)
+                    PasswordHash = BCrypt.Net.BCrypt.HashPassword(aesw.Decrypt(regRequest.Password) + hashSalt),
+                    RegistrationDate = DateTime.Now,
+                    LastOnline = DateTime.Now
                 });
                 
                 session.IsAuth = true;
@@ -118,7 +120,6 @@ namespace DottApp.WebAPI.Controllers
                 };
             } 
             Console.WriteLine("reg fail");
-
             return new RegistrationResponse();
         }
 

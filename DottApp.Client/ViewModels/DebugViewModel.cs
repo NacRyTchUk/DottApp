@@ -130,7 +130,6 @@ namespace DottApp.Client.ViewModels
         {
             RSACryptoServiceProvider rsaw = new RSACryptoServiceProvider();
 
-            Settings.Default["prKey"] = RSAKeys.ExportPrivateKey(rsaw);
 
             ConnectionSessionRequest csr = new ConnectionSessionRequest()
             {

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
 
-namespace DottApp.Api.Rest
+namespace DottApp.Api.Rest.Request_Response
 {
-    public class BaseRequest
+    public class UserInfo
     {
         [JsonPropertyName("accessToken")]
-        public string AccessToken { get; set; }
+        public DateTime RegistrationDate { get; set; }
     }
 }

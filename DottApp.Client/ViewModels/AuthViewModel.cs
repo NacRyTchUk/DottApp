@@ -104,6 +104,7 @@ namespace DottApp.Client.ViewModels
 
         private void OnSignUpCommandExecuted(object param)
         {
+            DaAPIw.BaseUrl = ConfigurationManager.AppSettings["BaseDebugApiUrl"];
             DaAPIw.Connect();
             DaAPIw.Registration(RegLogin, NickName, InRegPassword);
             MessageBox.Show(DaAPIw.IsAuth ? "Success!" : "Oh oh....");
@@ -116,6 +117,7 @@ namespace DottApp.Client.ViewModels
 
         private void OnSignInCommandExecuted(object param)
         {
+            DaAPIw.BaseUrl = ConfigurationManager.AppSettings["BaseDebugApiUrl"];
             DaAPIw.Connect();
             DaAPIw.SignIn(Login, InPassword);
             MessageBox.Show(DaAPIw.IsAuth ? "Success!" : "Oh oh....");
