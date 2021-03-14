@@ -66,6 +66,8 @@ namespace DottApp.Client.ViewModels
                 case 2: { new DebugWindow().Show(); break; }
                 case 3: { new TestWindow().Show(); break; }
                 case 4: { new AuthWindow().Show(); break; }
+                case 5: { new ChatWindow().Show(); break; }
+
             }
         }
 

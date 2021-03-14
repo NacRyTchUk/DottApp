@@ -22,8 +22,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="65" />
-            <ColumnDefinition x:Name="ChatColumn"
-                              Width="{Binding Width, UpdateSourceTrigger=PropertyChanged}"
+            <ColumnDefinition Width="{Binding Width, UpdateSourceTrigger=PropertyChanged}"
                               MaxWidth="500"
                               MinWidth="65" />
             <ColumnDefinition Width="*" />
@@ -101,7 +100,6 @@
                             
                             <ColumnDefinition Width="35" />
                         </Grid.ColumnDefinitions>
-
                         <Border Width="40"
                                 Height="40"
                                 CornerRadius="25"
@@ -118,7 +116,6 @@
                                 HorizontalAlignment="Right"
                                 CornerRadius="5"
                                 Background="LightGreen" />
-
                         <StackPanel Grid.Column="1">
                             <TextBlock Text="Николай Гончаров"
                                        Margin="10 0"
@@ -130,7 +127,6 @@
                                        FontSize="11"
                                        Foreground="black" />
                         </StackPanel>
-
                         <Border Grid.Column="2"
                                 Width="20"
                                 Height="20"
@@ -154,7 +150,6 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="35" />
                         </Grid.ColumnDefinitions>
-
                         <Border Grid.Column="0"
                                 Width="40"
                                 Height="40"
@@ -209,7 +204,6 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="35" />
                         </Grid.ColumnDefinitions>
-
                         <Border Width="40"
                                 Height="40"
                                 CornerRadius="25"
@@ -226,7 +220,6 @@
                                 HorizontalAlignment="Right"
                                 CornerRadius="5"
                                 Background="LightGray" />
-
                         <StackPanel Grid.Column="1">
                             <TextBlock Text="Лилеся Отвинова"
                                        Margin="10 0"
@@ -238,7 +231,6 @@
                                        FontSize="11"
                                        Foreground="black" />
                         </StackPanel>
-
                         <Border Grid.Column="2"
                                 Width="20"
                                 Height="20"

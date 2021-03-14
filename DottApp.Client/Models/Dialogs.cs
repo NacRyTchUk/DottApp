@@ -20,14 +20,17 @@ namespace DottApp.Client.Models
 
             public int NumOfMembers { get; set; }
 
-            public Chat(User user, ChatType ChatType, IList<Message> Messages)
+            public string Photo { get; set; }
+
+            public Chat(User User, ChatType ChatType, IList<Message> Messages)
             {
                 DateLastMessage = DateTime.Now;
-                NickName = user.NickName;
+                NickName = User.NickName;
                 this.ChatType = ChatType;
                 NumOfMembers = 0;
                 this.Messages = Messages;
                 this.NumofMessagesUnRead = 1;
+                Photo = User.Photo;
             }
         }
 

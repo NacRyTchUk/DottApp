@@ -30,6 +30,11 @@
             Margin="10,10,0,0"
             Command="{Binding OpenWindowCommand}"
             CommandParameter="4"/>
+            <Button Content="Chat window"
+                    HorizontalAlignment="Left"
+                    Margin="10,10,0,0"
+                    Command="{Binding OpenWindowCommand}"
+                    CommandParameter="5" />
         </StackPanel>
         <ProgressBar VerticalAlignment="Bottom" Value="{Binding ProgressBarValue}" 
                       Margin="10" Height="20" />
