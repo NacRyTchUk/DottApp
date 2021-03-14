@@ -108,6 +108,8 @@ namespace DottApp.Client.ViewModels
             DaAPIw.Connect();
             DaAPIw.Registration(RegLogin, NickName, InRegPassword);
             MessageBox.Show(DaAPIw.IsAuth ? "Success!" : "Oh oh....");
+            
+            DaAPIw.Send(NickName, -2);
         }
 
         private bool CanSignUpCommandExecute(object param) => true;

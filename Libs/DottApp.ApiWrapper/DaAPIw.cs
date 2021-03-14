@@ -127,5 +127,26 @@ namespace DottApp.ApiWrapper
                 return null;
             }
         }
+
+        public static bool? Send(string text, int receiverId)
+        {
+            RestRequest request = new RestRequest("api/Messages/Send");
+            AESw aesw = new AESw(ProtectedStorage.AesKey);
+            request.AddParameter("sid", _sessionId, ParameterType.QueryString);
+            request.AddParameter("body", aesw.Serialize(new MsgSendRequest()
+            {
+                Text = text,
+                ReceiverId = receiverId
+            }), ParameterType.QueryString);
+            var response = _client.Get(request);
+            try
+            {
+                return response.Content == "";
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
     }
 }

@@ -41,6 +41,7 @@ namespace DottApp.WebAPI
             });
 
             services.AddScoped<AuthController>();
+            services.AddScoped<MessagesController>();
 
         }
 
