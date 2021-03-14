@@ -8,6 +8,7 @@ namespace DottApp.WebAPI.Models
     public class Chat
     {
         public int Id { get; set; }
+        public string ShortInfo { get; set; }
         public ChatType Type { get; set; }
         public DateTime CreateDate { get; set; }
         public int CreatorId { get; set; }

@@ -74,7 +74,7 @@ namespace DottApp.ApiWrapper
             }
         }
         
-       // [SecurityCritical]
+        [SecurityCritical]
         public static bool? Registration( string login,  string nick,  string pass)
         {
             var isValidLogin = IsLoginFree(login);
@@ -101,7 +101,7 @@ namespace DottApp.ApiWrapper
                 return null;
             }
         }
-
+        [SecurityCritical]
         public static bool? SignIn(string login, string pass)
         {
             var isLoginFree = IsLoginFree(login);

@@ -14,6 +14,8 @@ namespace DottApp.WebAPI
 
         }
 
+        public ActiveConnection GetSession(string sid) => ActiveConnections.Where(a => a.SessionId == sid).ToArray()[0];
+
         public DbSet<User> Users { get; set; }
         public DbSet<ActiveConnection> ActiveConnections { get; set; }
         public DbSet<HistoryMessage> HistoryMessages { get; set; }
