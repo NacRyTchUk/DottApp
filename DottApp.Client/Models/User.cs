@@ -14,6 +14,7 @@ namespace DottApp.Client.Models
         
         public string Login { get; set; }
         public string Photo { get; set; }
+
         public User(string NickName, string Login, string Photo)
         {
             this.NickName = NickName;

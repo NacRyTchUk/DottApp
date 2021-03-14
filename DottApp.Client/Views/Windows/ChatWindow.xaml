@@ -23,10 +23,10 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="65" />
             <ColumnDefinition x:Name="ChatColumn"
-                              Width="{Binding Width, UpdateSourceTrigger=PropertyChanged}"
-                              MaxWidth="500"
-                              MinWidth="65" />
-            <ColumnDefinition Width="*" />
+                              MinWidth="65"
+                              Width="300" />
+            <ColumnDefinition Width="*"
+                              MinWidth="400" />
             <ColumnDefinition Width="270" />
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0"
@@ -52,16 +52,18 @@
 
             <DockPanel>
                 <ListView HorizontalAlignment="Stretch"
-                      SnapsToDevicePixels="True"
-                      HorizontalContentAlignment="Stretch"
-                      ItemsSource="{Binding Chats}"
-                      SelectedIndex="0"
-                      SelectedItem="{Binding SelectedChat}">
+                          SnapsToDevicePixels="True"
+                          HorizontalContentAlignment="Stretch"
+                          ItemsSource="{Binding Chats}"
+                          SelectedIndex="0"
+                          SelectedItem="{Binding SelectedChat}"
+                          ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                          ScrollViewer.HorizontalScrollBarVisibility="Visible">
                     <ListView.ItemTemplate>
                         <DataTemplate DataType="data:Chat">
-                            <DockPanel >
+                            <DockPanel>
                                 <Grid HorizontalAlignment="Stretch"
-                                  Margin="5">
+                                      Margin="5">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="50" />
                                         <ColumnDefinition Width="*" />
@@ -69,58 +71,51 @@
                                     </Grid.ColumnDefinitions>
 
                                     <Border Width="40"
-                                        Height="40"
-                                        CornerRadius="25"
-                                        BorderBrush="White"
-                                        BorderThickness="0.6">
+                                            Height="40"
+                                            CornerRadius="25"
+                                            BorderBrush="White"
+                                            BorderThickness="0.6">
                                         <Border.Background>
                                             <ImageBrush ImageSource="{Binding Photo}" />
                                         </Border.Background>
                                     </Border>
                                     <Border Width="10"
-                                        Height="10"
-                                        VerticalAlignment="Bottom"
-                                        Margin="5"
-                                        HorizontalAlignment="Right"
-                                        CornerRadius="5"
-                                        Background="LightGreen" />
+                                            Height="10"
+                                            VerticalAlignment="Bottom"
+                                            Margin="5"
+                                            HorizontalAlignment="Right"
+                                            CornerRadius="5"
+                                            Background="LightGreen" />
 
                                     <StackPanel Grid.Column="1">
                                         <TextBlock Text="{Binding NickName}"
-                                               Margin="10 0"
-                                               FontWeight="Bold" />
-                                        <TextBlock Text="{Binding Chat.Text}"
-                                               Margin="10 0"
-                                               TextTrimming="CharacterEllipsis"
-                                               Opacity="0.8"
-                                               FontSize="11"
-                                               Foreground="black" />
+                                                   HorizontalAlignment="Stretch"
+                                                   Margin="10 0"
+                                                   FontWeight="Bold"/>
+                                        <TextBlock Text="{Binding LastMessages}"
+                                                   Margin="10 0"
+                                                   TextTrimming="CharacterEllipsis"
+                                                   Opacity="0.8"
+                                                   FontSize="11"
+                                                   Foreground="black" />
                                     </StackPanel>
 
                                     <Border Grid.Column="2"
-                                        Width="20"
-                                        Height="20"
-                                        CornerRadius="15"
-                                        Background="White"
-                                        HorizontalAlignment="Right"
-                                        VerticalAlignment="Center"
-                                        Margin="5">
+                                            Width="20"
+                                            Height="20"
+                                            CornerRadius="15"
+                                            Background="White"
+                                            HorizontalAlignment="Right"
+                                            VerticalAlignment="Center"
+                                            Margin="5">
                                         <TextBlock FontSize="11"
-                                               Text="{Binding Messages.Count}"
-                                               Foreground="{StaticResource PrimaryHueDarkBrush}"
-                                               HorizontalAlignment="Center"
-                                               VerticalAlignment="Center" />
+                                                   Text="{Binding Messages.Count}"
+                                                   Foreground="{StaticResource PrimaryHueDarkBrush}"
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center" />
                                     </Border>
                                 </Grid>
                             </DockPanel>
-                            <!--<DataTemplate.Triggers>
-                            <DataTrigger Binding="{Binding Messages.Count}"
-                                         Value="0">
-                                <Setter TargetName="TextView"
-                                        Property="Foreground"
-                                        Value="Red" />
-                            </DataTrigger>
-                        </DataTemplate.Triggers>-->
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
@@ -128,16 +123,16 @@
         </StackPanel>
         <GridSplitter Grid.Column="1"
                       ShowsPreview="False"
-                      Width="5"
+                      Width="4"
                       HorizontalAlignment="Right"
                       VerticalAlignment="Stretch">
 
         </GridSplitter>
 
-
         <Grid Grid.Column="2"
               Background="{StaticResource PrimaryHueDarkBrush}">
-            <Grid Height="60"
+            <Grid x:Name="GridChat"
+                  Height="60"
                   VerticalAlignment="Top"
                   Background="{StaticResource PrimaryHueLightBrush}">
                 <Grid.Effect>
@@ -155,34 +150,35 @@
                     <TextBlock Text="{Binding SelectedChat.NickName}"
                                MaxWidth="250"
                                FontSize="20"
-                               VerticalAlignment="Center" />
+                               VerticalAlignment="Center"
+                               TextTrimming="CharacterEllipsis" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal"
                             HorizontalAlignment="Right">
                     <Button HorizontalAlignment="Right"
                             Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
-                            Margin="15 15 10 15"
+                            Margin="5 15 5 15"
                             Height="30"
                             Width="30">
                         <materialDesign:PackIcon Kind="Search" />
                     </Button>
                     <Button HorizontalAlignment="Right"
                             Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
-                            Margin="15 15 10 15"
+                            Margin="5 15 5 15"
                             Height="30"
                             Width="30">
                         <materialDesign:PackIcon Kind="Call" />
                     </Button>
                     <Button HorizontalAlignment="Right"
                             Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
-                            Margin="15 15 10 15"
+                            Margin="5 15 5 15"
                             Height="30"
                             Width="30">
                         <materialDesign:PackIcon Kind="VideoCall" />
                     </Button>
                     <Button HorizontalAlignment="Right"
                             Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
-                            Margin="15 15 10 15"
+                            Margin="5 15 5 15"
                             Height="30"
                             Width="30">
                         <materialDesign:PackIcon Kind="DotsVerticalCircle" />
@@ -197,7 +193,7 @@
                     <ListView.ItemTemplate>
                         <DataTemplate DataType="data:Chat">
                             <Grid>
-                                <Rectangle Width="300"
+                                <Rectangle Width="{Binding ActualWidth, ElementName=GridChat, Mode=Default}"
                                            Height="30"
                                            Rectangle.Fill="{DynamicResource MaterialDesignBodyLight}"
                                            HorizontalAlignment="Left"
@@ -208,18 +204,10 @@
                                 <StackPanel Orientation="Horizontal">
 
                                     <TextBlock Text="{Binding Text}"
-                                               Name="TextView" 
-                                               Foreground="{DynamicResource MaterialDesignTextFieldBox}"/>
+                                               Name="TextView"
+                                               Foreground="{DynamicResource MaterialDesignTextFieldBox}" />
                                 </StackPanel>
                             </Grid>
-                            <!--<DataTemplate.Triggers>
-                                <DataTrigger Binding="{Binding Messages.Count}"
-                                             Value="0">
-                                    <Setter TargetName="TextView"
-                                            Property="Foreground"
-                                            Value="Red" />
-                                </DataTrigger>
-                            </DataTemplate.Triggers>-->
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
@@ -267,7 +255,13 @@
                 </Grid>
             </Border>
         </Grid>
+        <GridSplitter Grid.Column="2"
+                      ShowsPreview="False"
+                      Width="4"
+                      HorizontalAlignment="Right"
+                      VerticalAlignment="Stretch">
 
+        </GridSplitter>
         <StackPanel Grid.Column="3"
                     Background="{StaticResource PrimaryHueLightBrush}">
             <StackPanel Orientation="Horizontal"

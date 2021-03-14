@@ -109,9 +109,9 @@ namespace DottApp.Client.ViewModels
             users[3] = new User("Федор Лозбень", "shakal", "pack://application:,,,/Data/shakal.jpg");
             users[4] = new User("Макаронный монстр", "sebya_pozovi", "pack://application:,,,/Data/monstr.jpeg");
             Message[] messages1 = new Message[3];
-            messages1[0] = new Message
+            messages1[2] = new Message
             {
-                Text = $"@sebya_pozovi, когда поздравляем? Где время?",
+                Text = $"@sebya_pozovi, когда поздравляем? Где время? @sebya_pozovi, когда поздравляем? Где время?",
                 IsEdited = false,
                 IsRead = false,
                 Attachments = null,
@@ -128,7 +128,7 @@ namespace DottApp.Client.ViewModels
                 Sender = users[0],
                 DateMessageSent = DateTime.Now
             };
-            messages1[2] = new Message
+            messages1[0] = new Message
             {
                 Text = "нет",
                 IsEdited = false,
@@ -165,12 +165,4 @@ namespace DottApp.Client.ViewModels
         }
 
     }
-    //#region ChatWidth
-    //private string _Width = "380";
-    //public string Width
-    //{
-    //    get => _Width;
-    //    set => Set(ref _Width, value);
-    //}
-    //#endregion
 }

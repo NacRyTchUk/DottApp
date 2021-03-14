@@ -22,6 +22,16 @@ namespace DottApp.Client.Models
 
             public string Photo { get; set; }
 
+            public string _LastMessages;
+            public string LastMessages
+            {
+                get
+                {
+                    _LastMessages = Messages[Messages.Count - 1].Text;
+                    return _LastMessages;
+                }
+                set { }
+            }
             public Chat(User User, ChatType ChatType, IList<Message> Messages)
             {
                 DateLastMessage = DateTime.Now;
@@ -29,7 +39,6 @@ namespace DottApp.Client.Models
                 this.ChatType = ChatType;
                 NumOfMembers = 0;
                 this.Messages = Messages;
-                this.NumofMessagesUnRead = 1;
                 Photo = User.Photo;
             }
         }
