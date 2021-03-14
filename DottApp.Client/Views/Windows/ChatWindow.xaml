@@ -50,33 +50,34 @@
                      materialDesign:HintAssist.Hint="SEARCH"
                      Foreground="White" />
 
-            <ListView HorizontalAlignment="Left"
+            <DockPanel>
+                <ListView HorizontalAlignment="Stretch"
                       SnapsToDevicePixels="True"
+                      HorizontalContentAlignment="Stretch"
                       ItemsSource="{Binding Chats}"
                       SelectedIndex="0"
                       SelectedItem="{Binding SelectedChat}">
-                <ListView.ItemTemplate>
-                    <DataTemplate DataType="data:Chat">
-                        <StackPanel Orientation="Horizontal">
-                            <Grid HorizontalAlignment="Left"
+                    <ListView.ItemTemplate>
+                        <DataTemplate DataType="data:Chat">
+                            <DockPanel >
+                                <Grid HorizontalAlignment="Stretch"
                                   Margin="5">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="50" />
-                                    <ColumnDefinition Width="*" />
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="35" />
+                                    </Grid.ColumnDefinitions>
 
-                                    <ColumnDefinition Width="35" />
-                                </Grid.ColumnDefinitions>
-
-                                <Border Width="40"
+                                    <Border Width="40"
                                         Height="40"
                                         CornerRadius="25"
                                         BorderBrush="White"
                                         BorderThickness="0.6">
-                                    <Border.Background>
-                                        <ImageBrush ImageSource="{Binding Photo}" />
-                                    </Border.Background>
-                                </Border>
-                                <Border Width="10"
+                                        <Border.Background>
+                                            <ImageBrush ImageSource="{Binding Photo}" />
+                                        </Border.Background>
+                                    </Border>
+                                    <Border Width="10"
                                         Height="10"
                                         VerticalAlignment="Bottom"
                                         Margin="5"
@@ -84,19 +85,19 @@
                                         CornerRadius="5"
                                         Background="LightGreen" />
 
-                                <StackPanel Grid.Column="1">
-                                    <TextBlock Text="{Binding NickName}"
+                                    <StackPanel Grid.Column="1">
+                                        <TextBlock Text="{Binding NickName}"
                                                Margin="10 0"
                                                FontWeight="Bold" />
-                                    <TextBlock Text="{Binding Chat.Text}"
+                                        <TextBlock Text="{Binding Chat.Text}"
                                                Margin="10 0"
                                                TextTrimming="CharacterEllipsis"
                                                Opacity="0.8"
                                                FontSize="11"
                                                Foreground="black" />
-                                </StackPanel>
+                                    </StackPanel>
 
-                                <Border Grid.Column="2"
+                                    <Border Grid.Column="2"
                                         Width="20"
                                         Height="20"
                                         CornerRadius="15"
@@ -104,15 +105,15 @@
                                         HorizontalAlignment="Right"
                                         VerticalAlignment="Center"
                                         Margin="5">
-                                    <TextBlock FontSize="11"
+                                        <TextBlock FontSize="11"
                                                Text="{Binding Messages.Count}"
                                                Foreground="{StaticResource PrimaryHueDarkBrush}"
                                                HorizontalAlignment="Center"
                                                VerticalAlignment="Center" />
-                                </Border>
-                            </Grid>
-                        </StackPanel>
-                        <!--<DataTemplate.Triggers>
+                                    </Border>
+                                </Grid>
+                            </DockPanel>
+                            <!--<DataTemplate.Triggers>
                             <DataTrigger Binding="{Binding Messages.Count}"
                                          Value="0">
                                 <Setter TargetName="TextView"
@@ -120,9 +121,10 @@
                                         Value="Red" />
                             </DataTrigger>
                         </DataTemplate.Triggers>-->
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </DockPanel>
         </StackPanel>
         <GridSplitter Grid.Column="1"
                       ShowsPreview="False"

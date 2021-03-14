@@ -22,7 +22,8 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="65" />
-            <ColumnDefinition Width="{Binding Width, UpdateSourceTrigger=PropertyChanged}"
+            <ColumnDefinition x:Name="ChatColumn"
+                              Width="{Binding Width, UpdateSourceTrigger=PropertyChanged}"
                               MaxWidth="500"
                               MinWidth="65" />
             <ColumnDefinition Width="*" />
@@ -36,6 +37,7 @@
         </StackPanel>
         <StackPanel Grid.Column="1"
                     Background="{StaticResource PrimaryHueLightBrush}">
+            
             <StackPanel Orientation="Horizontal"
                         Background="White">
                 <Button Style="{StaticResource MaterialDesignFlatButton}">
@@ -49,20 +51,23 @@
                      materialDesign:HintAssist.Hint="SEARCH"
                      Foreground="White" />
 
-            <ListView HorizontalAlignment="Left"
-                      SnapsToDevicePixels="True"
-                      ItemsSource="{Binding Chats}"
-                      SelectedIndex="0"
-                      SelectedItem="{Binding SelectedChat}">
-                <ListView.ItemTemplate>
-                    <DataTemplate DataType="data:Chat">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding NickName}"
-                                       Name="TextView" />
-                            <TextBlock Text="{Binding Messages.Count, StringFormat=[Сообщений:{0}]}"
-                                       Margin="3,0,0,0" />
-                        </StackPanel>
-                        <!--<DataTemplate.Triggers>
+            <DockPanel>
+                <ListView HorizontalAlignment="Stretch"
+                          SnapsToDevicePixels="True"
+                          HorizontalContentAlignment="Stretch"
+                          ItemsSource="{Binding Chats}"
+                          SelectedIndex="0"
+                          SelectedItem="{Binding SelectedChat}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate DataType="data:Chat">
+                               <DockPanel  >
+                                   <TextBlock Text="{Binding NickName}"
+                                              Name="TextView" />
+                                   <TextBlock Text="{Binding Messages.Count, StringFormat=[Сообщений:{0}]}"
+                                              Margin="3,0,0,0" 
+                                              HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                               </DockPanel>
+                            <!--<DataTemplate.Triggers>
                             <DataTrigger Binding="{Binding Messages.Count}"
                                          Value="0">
                                 <Setter TargetName="TextView"
@@ -70,9 +75,10 @@
                                         Value="Red" />
                             </DataTrigger>
                         </DataTemplate.Triggers>-->
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </DockPanel>
         </StackPanel>
         <!--<StackPanel Grid.Column="1" 
                     Background="{StaticResource PrimaryHueLightBrush}">
@@ -100,6 +106,7 @@
                             
                             <ColumnDefinition Width="35" />
                         </Grid.ColumnDefinitions>
+
                         <Border Width="40"
                                 Height="40"
                                 CornerRadius="25"
@@ -116,6 +123,7 @@
                                 HorizontalAlignment="Right"
                                 CornerRadius="5"
                                 Background="LightGreen" />
+
                         <StackPanel Grid.Column="1">
                             <TextBlock Text="Николай Гончаров"
                                        Margin="10 0"
@@ -127,6 +135,7 @@
                                        FontSize="11"
                                        Foreground="black" />
                         </StackPanel>
+
                         <Border Grid.Column="2"
                                 Width="20"
                                 Height="20"
@@ -150,6 +159,7 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="35" />
                         </Grid.ColumnDefinitions>
+
                         <Border Grid.Column="0"
                                 Width="40"
                                 Height="40"
@@ -204,6 +214,7 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="35" />
                         </Grid.ColumnDefinitions>
+
                         <Border Width="40"
                                 Height="40"
                                 CornerRadius="25"
@@ -220,6 +231,7 @@
                                 HorizontalAlignment="Right"
                                 CornerRadius="5"
                                 Background="LightGray" />
+
                         <StackPanel Grid.Column="1">
                             <TextBlock Text="Лилеся Отвинова"
                                        Margin="10 0"
@@ -231,6 +243,7 @@
                                        FontSize="11"
                                        Foreground="black" />
                         </StackPanel>
+
                         <Border Grid.Column="2"
                                 Width="20"
                                 Height="20"
