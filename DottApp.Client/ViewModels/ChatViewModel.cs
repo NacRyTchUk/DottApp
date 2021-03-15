@@ -14,6 +14,13 @@ namespace DottApp.Client.ViewModels
 {
     internal class ChatViewModel : Base.ViewModel
     {
+        //private int _DialogueListSize = 300;
+        //public int DialogueListSize
+        //{
+        //    get => _DialogueListSize;
+        //    set => Set(ref _DialogueListSize, value);
+        //}
+        
         public ObservableCollection<Chat> Chats { get; }
 
         public object[] CompositeCollection { get; }

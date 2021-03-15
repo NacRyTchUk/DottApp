@@ -8,24 +8,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace DottApp.Client.Views.Windows
+namespace DottApp.Client.Views
 {
     /// <summary>
-    /// Логика взаимодействия для ChatWindow.xaml
+    /// Логика взаимодействия для UserControlMessageReceived.xaml
     /// </summary>
-    public partial class ChatWindow : Window
+    public partial class UserControlMessageReceived : UserControl
     {
-        public ChatWindow()
+        public UserControlMessageReceived()
         {
             InitializeComponent();
         }
-
-        //private void ChatDialogsSplitterMouseMove(object sender, MouseEventArgs e)
-        //{
-        //    GridChat.Width = ChatColumn.Width;
-        //    //ChatListText
-        //}
     }
 }

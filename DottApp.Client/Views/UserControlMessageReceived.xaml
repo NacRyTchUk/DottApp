@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="DottApp.Client.Views.UserControlMessageReceived"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:DottApp.Client.Views"
+             xmlns:vm="clr-namespace:DottApp.Client.ViewModels"
+             xmlns:data="clr-namespace:DottApp.Client.Models"
+             mc:Ignorable="d"
+             d:DesignHeight="150"
+             d:DesignWidth="280">
+    <UserControl.DataContext>
+        <vm:ChatViewModel />
+    </UserControl.DataContext>
+    <Grid>
+        <Border Background="{StaticResource PrimaryHueDarkBrush}"
+                CornerRadius="15 15 15 0"
+                Margin="10 12">
+            <!--<TextBlock Margin="15"
+                       TextWrapping="Wrap"
+                       Text="Parents are the ultimate role models for children. Every word, movement and action has an effect. No other person or outside force has a greater influence on a child than the parent."
+                       Foreground="White" />-->
+        </Border>
+        <ListView HorizontalAlignment="Left"
+                  SnapsToDevicePixels="True"
+                  ItemsSource="{Binding SelectedChat.Messages}">
+            <ListView.DataContext>
+                <vm:ChatViewModel />
+            </ListView.DataContext>
+            <ListView.ItemTemplate>
+                <DataTemplate DataType="data:Chat">
+                    <Grid>
+                        <Rectangle Width="400"
+                                   Height="30"
+                                   Rectangle.Fill="{DynamicResource MaterialDesignBodyLight}"
+                                   HorizontalAlignment="Left"
+                                   Opacity="1"
+                                   RadiusX="8"
+                                   RadiusY="8">
+                        </Rectangle>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Text}"
+                                       Name="TextView"
+                                       TextWrapping="Wrap"
+                                       Foreground="{DynamicResource MaterialDesignTextFieldBox}" 
+                                       />
+                            
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <!--<TextBlock Text="Thu 5:45PM"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Bottom"
+                   FontSize="10"
+                   Margin="10 0" />-->
+    </Grid>
+</UserControl>
